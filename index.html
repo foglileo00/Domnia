@@ -384,20 +384,35 @@
   .case-row .label{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--coral); }
   .case-row p{ margin:5px 0 0; font-size:14.5px; color:var(--ink-soft); }
 
-  /* ---------- FASCIA VIDEO ---------- */
-  .video-band{ padding:0; background:var(--ink); }
+  /* ---------- FASCIA VIDEO CON INVITO SOVRAPPOSTO ---------- */
+  /* Video e testo occupano la stessa cella di griglia: si sovrappongono
+     senza posizionamento assoluto, mantenendo l'altezza del video. */
+  .video-band{ padding:0; background:var(--ink); display:grid; }
+  .video-band > *{ grid-area:1 / 1; }
   .band-video{
     display:block; width:100%;
-    height:clamp(260px,52vh,520px); object-fit:cover;
+    height:clamp(440px,76vh,640px); object-fit:cover;
   }
-
-  /* ---------- CONSULT / CTA bands ---------- */
-  .consult{ background:var(--accent); color:#FBF8F1; text-align:center; }
-  .consult h2{ color:#FBF8F1; font-size:clamp(26px,3.6vw,36px); max-width:20ch; margin:10px auto 0; }
-  .consult .eyebrow{ color:#D8C79F; }
-  .consult p{ color:#DCE6D6; max-width:52ch; margin:18px auto 0; font-size:15.5px; }
-  .consult .btn-primary{ background:#FBF8F1; color:var(--accent-deep); margin-top:28px; }
-  .consult .btn-primary:hover{ background:#fff; }
+  .video-cta{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:56px 0;
+  }
+  /* Velatura scura: senza, il testo chiaro sparisce sui campi assolati. */
+  .video-cta::before{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(24,32,22,0.46), rgba(24,32,22,0.72));
+  }
+  .video-cta .wrap{ position:relative; }
+  .video-cta h2{
+    color:#FBF8F1; font-size:clamp(26px,3.6vw,36px); max-width:20ch; margin:0 auto;
+    text-shadow:0 2px 14px rgba(0,0,0,0.45);
+  }
+  .video-cta p{
+    color:#E4EDE0; max-width:52ch; margin:18px auto 0; font-size:15.5px;
+    text-shadow:0 1px 10px rgba(0,0,0,0.45);
+  }
+  .video-cta .btn-primary{ background:#FBF8F1; color:var(--accent-deep); margin-top:28px; }
+  .video-cta .btn-primary:hover{ background:#fff; }
 
   /* ---------- CONTACT ---------- */
   .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -542,20 +557,19 @@
     </div>
   </section>
 
-  <section class="video-band reveal" aria-label="Il territorio in cui lavoriamo">
+  <section class="video-band reveal">
     <video
       class="band-video"
       src="video/domnia-presentazione.mp4"
       autoplay muted loop playsinline preload="metadata"
-      aria-label="Ripresa aerea di un casale toscano tra le colline, con cipressi e piscina"
+      aria-hidden="true"
     ></video>
-  </section>
-
-  <section class="consult reveal">
-    <div class="wrap">
-      <h2 class="fade-up">Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
-      <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
-      <a class="btn btn-primary" href="https://wa.me/390000000000?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
+    <div class="video-cta">
+      <div class="wrap">
+        <h2 class="fade-up">Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
+        <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
+        <a class="btn btn-primary" href="https://wa.me/390000000000?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -899,13 +913,13 @@
   })();
 
   (function(){
-    // Chi ha chiesto meno animazioni nel sistema operativo non si vede partire
-    // il video da solo: lo fermiamo e gli diamo i comandi per avviarlo lui.
+    // Chi ha chiesto meno animazioni nel sistema operativo vede il video fermo
+    // sul primo fotogramma, come fosse una fotografia. Niente comandi di
+    // riproduzione: finirebbero sotto il testo sovrapposto e sarebbero inutili.
     if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
     document.querySelectorAll('.band-video').forEach(function(v){
       v.removeAttribute('autoplay');
       v.removeAttribute('loop');
-      v.setAttribute('controls','');
       v.pause();
     });
   })();
