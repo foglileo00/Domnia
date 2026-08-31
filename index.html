@@ -109,6 +109,9 @@
   @media (max-width:640px){ section{ padding:64px 0; } }
   .section-head{ max-width:640px; margin-bottom:52px; }
   .section-head h2{ font-size:clamp(28px,3.6vw,38px); margin-top:10px; }
+  .intro-text{ max-width:640px; font-size:15px; line-height:1.7; color:var(--ink-soft); margin-bottom:40px; }
+  .intro-text strong{ color:var(--ink); font-weight:600; }
+  .intro-text em{ font-style:italic; color:var(--coral); }
   .band-alt{ background:var(--bg-alt); }
 
   /* ---------- HERO ---------- */
@@ -122,7 +125,7 @@
   .hero-tags span{ font-size:13px; color:var(--ink-soft); }
   .hero-tags .dot{ width:3px; height:3px; border-radius:50%; background:var(--ink-faint); }
   .hero-visual{ border-radius:26px; overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(42,36,32,0.06); }
-  .hero-visual svg{ width:100%; height:auto; }
+  .hero-visual img{ width:100%; height:auto; display:block; }
 
   /* ---------- CHI SIAMO ---------- */
   .team-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -141,26 +144,225 @@
   .approach-line{ text-align:center; margin-top:44px; font-family:'Fraunces',serif; font-style:italic; font-size:18px; color:var(--ink-soft); }
 
   /* ---------- WHO FOR chips ---------- */
-  .chip-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-  @media (max-width:720px){ .chip-grid{ grid-template-columns:repeat(2,1fr); } }
+  .chip-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  @media (max-width:720px){ .chip-grid{ grid-template-columns:1fr; } }
   .chip{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    width:100%; text-align:left; cursor:pointer;
     background:var(--surface); border:1px solid var(--line); border-radius:14px;
-    padding:24px 20px; font-family:'Fraunces',serif; font-size:16.5px; font-weight:500;
+    padding:26px 22px; font-family:'Fraunces',serif; font-size:16.5px; font-weight:500;
+    color:var(--ink);
+    transition:background .15s,color .15s,border-color .15s,transform .15s;
+  }
+  .chip:hover{ background:var(--accent); color:#FBF8F1; border-color:var(--accent); transform:translateY(-2px); }
+  .chip-more{ font-family:'JetBrains Mono',monospace; font-size:17px; opacity:.55; }
+
+  /* ---------- MODAL ---------- */
+  .modal{
+    border:none; padding:0; background:transparent; color:var(--ink);
+    width:min(620px,calc(100% - 32px));
+  }
+  .modal::backdrop{ background:rgba(42,36,32,0.52); }
+  .modal[open]{ animation:modal-zoom .24s cubic-bezier(.2,.8,.3,1); }
+  .modal[open]::backdrop{ animation:modal-fade .24s ease; }
+  @keyframes modal-zoom{ from{ opacity:0; transform:scale(.9); } to{ opacity:1; transform:scale(1); } }
+  @keyframes modal-fade{ from{ opacity:0; } to{ opacity:1; } }
+  .modal-inner{
+    position:relative; background:var(--surface); border:1px solid var(--line);
+    border-radius:20px; padding:36px; box-shadow:var(--shadow);
+    max-height:calc(100vh - 60px); overflow-y:auto;
+  }
+  @media (max-width:560px){ .modal-inner{ padding:28px 22px; } }
+  .modal-close{
+    position:absolute; top:16px; right:16px; width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--line); border-radius:50%; background:var(--bg);
+    color:var(--ink-soft); font-size:17px; line-height:1; cursor:pointer;
     transition:background .15s,color .15s,border-color .15s;
   }
-  .chip:hover{ background:var(--accent); color:#FBF8F1; border-color:var(--accent); }
+  .modal-close:hover{ background:var(--accent); color:#FBF8F1; border-color:var(--accent); }
+  .modal h3{ font-size:22px; margin-top:8px; padding-right:44px; }
+  .modal-lead{ color:var(--ink-soft); font-size:14.5px; margin:14px 0 0; }
+  .option-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; }
+  .option-grid.single{ grid-template-columns:1fr; }
+  @media (max-width:560px){ .option-grid{ grid-template-columns:1fr; } }
+  .option-card{ background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .option-card h4{ font-family:'Fraunces',serif; font-size:16.5px; font-weight:600; margin:0; }
+  .option-card p{ margin:10px 0 0; font-size:13.5px; color:var(--ink-soft); }
+  .option-card ul{ list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  .option-card li{ font-size:13px; color:var(--ink-soft); padding-left:15px; position:relative; }
+  .option-card li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
+  .modal-steps{ margin-top:22px; border-top:1px solid var(--line); padding-top:18px; }
+  .modal-steps summary{
+    display:flex; align-items:center; justify-content:space-between;
+    cursor:pointer; list-style:none;
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--accent);
+    padding:6px 0; user-select:none;
+  }
+  .modal-steps summary::-webkit-details-marker{ display:none; }
+  .modal-steps summary::after{
+    content:"+"; font-family:'JetBrains Mono',monospace; font-size:15px;
+    color:var(--accent); transition:transform .25s ease;
+  }
+  .modal-steps[open] summary::after{ transform:rotate(45deg); }
+  .modal-steps .step-list{
+    overflow:hidden; margin-top:16px;
+    animation:steps-open .28s ease forwards;
+  }
+  @keyframes steps-open{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .step-list{ display:grid; grid-template-columns:1fr 1fr; gap:11px 20px; }
+  @media (max-width:560px){ .step-list{ grid-template-columns:1fr; } }
+  .step{ display:flex; gap:10px; align-items:baseline; }
+  .step-num{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--coral); flex:none; }
+  .step p{ margin:0; font-size:13px; color:var(--ink-soft); }
+  .step strong{ color:var(--ink); font-weight:600; }
+  .modal-actions{ margin-top:26px; }
 
-  /* ---------- CAPABILITIES list ---------- */
-  .cap-list{ display:grid; grid-template-columns:1fr 1fr; gap:0 48px; }
-  @media (max-width:720px){ .cap-list{ grid-template-columns:1fr; } }
-  .cap-item{ display:flex; gap:16px; padding:18px 0; border-top:1px solid var(--line); }
-  .cap-item:nth-child(6),.cap-item:nth-child(7){ border-bottom:1px solid var(--line); }
-  .cap-item svg{ flex:none; margin-top:3px; color:var(--accent); }
-  .cap-item p{ margin:0; font-size:15px; }
-  .cap-item strong{ font-weight:600; }
+  /* ---------- FULLSCREEN modal (strutture) ---------- */
+  .modal-fullscreen{
+    width:100%; max-width:100%; height:100%; max-height:100%;
+    margin:0; padding:0; border:none; background:transparent;
+  }
+  .modal-fullscreen::backdrop{ background:rgba(10,8,6,0.6); backdrop-filter:blur(6px); }
+  .modal-fullscreen[open]{ animation:fs-slidein .38s cubic-bezier(.16,1,.3,1); }
+  .modal-fullscreen[open]::backdrop{ animation:modal-fade .3s ease; }
+  @keyframes fs-slidein{
+    from{ opacity:0; transform:translateY(48px) scale(.97); }
+    to{   opacity:1; transform:translateY(0)    scale(1);   }
+  }
+  .modal-fullscreen .modal-inner{
+    height:100vh; border-radius:0; border:none;
+    overflow-y:auto; padding:0;
+    display:flex; flex-direction:column;
+  }
+  .fs-header{
+    position:sticky; top:0; z-index:10;
+    background:rgba(255,254,250,0.92); backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+  }
+  @media (max-width:640px){ .fs-header{ padding:14px 20px; } }
+  .fs-title{ display:flex; flex-direction:column; gap:2px; }
+  .fs-title .eyebrow{ margin:0; }
+  .fs-title h3{ font-size:20px; margin:4px 0 0; padding:0; }
+  .fs-close{
+    width:40px; height:40px; border-radius:50%; border:1px solid var(--line);
+    background:var(--bg); color:var(--ink-soft); font-size:20px; line-height:1;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .15s,color .15s,border-color .15s; flex:none;
+  }
+  .fs-close:hover{ background:var(--ink); color:#FBF8F1; border-color:var(--ink); }
+  .fs-body{ flex:1; padding:36px 32px; max-width:900px; width:100%; margin:0 auto; }
+  @media (max-width:640px){ .fs-body{ padding:24px 20px; } }
+  .fs-lead{ font-size:15px; color:var(--ink-soft); max-width:60ch; margin:0 0 32px; line-height:1.7; }
+  .fs-lead strong{ color:var(--accent); }
+  .fs-prop-list{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:720px){ .fs-prop-list{ grid-template-columns:1fr; } }
+  .fs-prop-card{ border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--surface); box-shadow:var(--shadow); }
+  .fs-prop-slides{ display:flex; overflow-x:hidden; scroll-behavior:smooth; }
+  .fs-prop-slides img{ width:100%; height:260px; object-fit:cover; flex:none; flex-shrink:0; }
+  @media (max-width:640px){ .fs-prop-slides img{ height:200px; } }
+
+  /* ---------- STRUTTURE button & modal ---------- */
+  .btn-strutture{
+    display:inline-flex; align-items:center; gap:9px; margin-top:20px;
+    background:transparent; border:1px solid var(--accent); border-radius:100px;
+    padding:9px 18px; color:var(--accent); font-size:13px; font-weight:600;
+    letter-spacing:0.03em; text-transform:uppercase; cursor:pointer;
+    transition:background .18s, color .18s, transform .18s;
+  }
+  .btn-strutture:hover{ background:var(--accent); color:#FBF8F1; transform:translateY(-1px); }
+  .btn-strutture svg{ transition:transform .18s; }
+  .btn-strutture:hover svg{ transform:translateX(3px); }
+
+  .prop-list{ display:flex; flex-direction:column; gap:32px; margin-top:22px; }
+  .prop-card{ border:1px solid var(--line); border-radius:16px; overflow:hidden; background:var(--bg); }
+  .prop-gallery{ position:relative; }
+  .prop-slides{ display:flex; overflow-x:hidden; scroll-behavior:smooth; border-radius:0; }
+  .prop-slides img{ width:100%; height:220px; object-fit:cover; flex:none; flex-shrink:0; }
+  .prop-nav{ position:absolute; top:50%; transform:translateY(-50%); display:flex; justify-content:space-between; width:100%; padding:0 10px; pointer-events:none; }
+  .prop-btn{
+    pointer-events:all; width:32px; height:32px; border-radius:50%; border:none;
+    background:rgba(255,255,255,.82); backdrop-filter:blur(4px); cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; color:var(--ink); transition:background .15s;
+  }
+  .prop-btn:hover{ background:#fff; }
+  .prop-dots{ display:flex; justify-content:center; gap:6px; padding:10px 0 0; }
+  .prop-dot{ width:6px; height:6px; border-radius:50%; background:var(--line); border:none; cursor:pointer; padding:0; transition:background .2s; }
+  .prop-dot.active{ background:var(--accent); }
+  .prop-body{ padding:20px 22px 24px; }
+  .prop-tag{
+    display:inline-block; background:var(--accent); color:#FBF8F1;
+    font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:500;
+    text-transform:uppercase; letter-spacing:0.1em;
+    padding:3px 10px; border-radius:100px; margin-bottom:10px;
+  }
+  .prop-body h4{ font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin:0 0 8px; }
+  .prop-body p{ font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.6; }
+
+  /* ---------- CASI STUDIO (modale fullscreen) ---------- */
+  .fs-case-list{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+  @media (max-width:820px){ .fs-case-list{ grid-template-columns:1fr; } }
+  .fs-case-card{
+    display:flex; flex-direction:column;
+    border:1px solid var(--line); border-radius:20px; overflow:hidden;
+    background:var(--surface); box-shadow:var(--shadow);
+  }
+  .case-window{ background:var(--bg-alt); border-bottom:1px solid var(--line); }
+  .case-chrome{ display:flex; align-items:center; gap:8px; padding:11px 14px; border-bottom:1px solid var(--line); }
+  .case-dot{ width:9px; height:9px; border-radius:50%; background:var(--line); flex:none; }
+  .case-dot:nth-child(1){ background:#E5928A; }
+  .case-dot:nth-child(2){ background:#E8C57E; }
+  .case-dot:nth-child(3){ background:#9DBE8C; }
+  .case-url{
+    flex:1; margin-left:6px; background:var(--surface); border:1px solid var(--line);
+    border-radius:100px; padding:5px 13px; text-align:center;
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .case-shot{
+    height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+    background:linear-gradient(140deg,var(--accent-tint),var(--bg-alt));
+    text-align:center; padding:22px;
+  }
+  @media (max-width:640px){ .case-shot{ height:170px; } }
+  .case-shot-name{ font-family:'Fraunces',serif; font-size:23px; font-weight:600; color:var(--accent-deep); margin:0; }
+  .case-shot-kind{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.09em;
+    text-transform:uppercase; color:var(--accent); background:var(--surface);
+    border:1px solid var(--line); border-radius:100px; padding:4px 11px;
+  }
+  .fs-case-body{ padding:24px 24px 26px; display:flex; flex-direction:column; flex:1; }
+  .case-sub{ font-size:13px; color:var(--ink-faint); margin:0; }
+  .case-rows{ display:flex; flex-direction:column; gap:14px; margin:20px 0 0; }
+  .case-row .label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:10.5px;
+    letter-spacing:0.09em; text-transform:uppercase; color:var(--coral); margin-bottom:5px;
+  }
+  .case-row p{ font-size:13.5px; color:var(--ink-soft); margin:0; line-height:1.65; }
+  .case-visit{
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    margin-top:auto; padding-top:22px;
+  }
+  .case-visit a{
+    display:inline-flex; align-items:center; gap:9px; width:100%; justify-content:center;
+    background:var(--accent); color:#FBF8F1; border-radius:100px;
+    padding:12px 20px; font-size:14px; font-weight:500;
+    transition:background .18s, transform .18s;
+  }
+  .case-visit a:hover{ background:var(--accent-deep); transform:translateY(-1px); }
+  .case-visit svg{ transition:transform .18s; }
+  .case-visit a:hover svg{ transform:translate(2px,-2px); }
 
   /* ---------- SERVICES pillars ---------- */
-  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .service-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
   @media (max-width:900px){ .service-grid{ grid-template-columns:1fr; } }
   .service-card{ display:flex; flex-direction:column; gap:16px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px; }
   .service-num{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--coral); }
@@ -169,15 +371,6 @@
   .service-card ul{ list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:9px; }
   .service-card li{ font-size:14px; color:var(--ink-soft); padding-left:16px; position:relative; }
   .service-card li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
-
-  /* ---------- METHOD timeline ---------- */
-  .method-list{ display:grid; grid-template-columns:repeat(6,1fr); gap:0; }
-  @media (max-width:900px){ .method-list{ grid-template-columns:repeat(3,1fr); row-gap:36px; } }
-  @media (max-width:520px){ .method-list{ grid-template-columns:1fr 1fr; } }
-  .method-item{ border-top:2px solid var(--line); padding-top:16px; padding-right:16px; }
-  .method-num{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--coral); }
-  .method-item h4{ font-family:'Fraunces',serif; font-size:16.5px; font-weight:600; margin:8px 0 6px; }
-  .method-item p{ font-size:13.5px; color:var(--ink-soft); margin:0; }
 
   /* ---------- PORTFOLIO ---------- */
   .case-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -191,22 +384,6 @@
   .case-row{ margin-top:16px; }
   .case-row .label{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--coral); }
   .case-row p{ margin:5px 0 0; font-size:14.5px; color:var(--ink-soft); }
-
-  /* ---------- PRICING ---------- */
-  .price-group{ margin-bottom:52px; }
-  .price-group:last-child{ margin-bottom:0; }
-  .price-group-title{ font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-faint); margin-bottom:16px; }
-  .price-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-  .price-grid.cols-3{ grid-template-columns:repeat(3,1fr); }
-  @media (max-width:900px){ .price-grid, .price-grid.cols-3{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:560px){ .price-grid, .price-grid.cols-3{ grid-template-columns:1fr; } }
-  .price-card{ border:1px solid var(--line); border-radius:16px; padding:22px; background:var(--surface); display:flex; flex-direction:column; }
-  .price-card.featured{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent); }
-  .price-card h4{ font-family:'Fraunces',serif; font-size:16.5px; font-weight:600; }
-  .price-value{ font-family:'JetBrains Mono',monospace; font-size:21px; color:var(--accent); margin-top:10px; font-variant-numeric:tabular-nums; }
-  .price-value small{ font-size:12px; color:var(--ink-faint); font-weight:400; }
-  .price-card p.desc{ font-size:13.5px; color:var(--ink-soft); margin-top:10px; flex:1; }
-  .price-note{ font-size:13px; color:var(--ink-faint); margin-top:28px; font-style:italic; }
 
   /* ---------- WHY ---------- */
   .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px 28px; }
@@ -222,11 +399,6 @@
   .consult p{ color:#DCE6D6; max-width:52ch; margin:18px auto 0; font-size:15.5px; }
   .consult .btn-primary{ background:#FBF8F1; color:var(--accent-deep); margin-top:28px; }
   .consult .btn-primary:hover{ background:#fff; }
-
-  .cta-band{ text-align:center; }
-  .cta-band h2{ font-size:clamp(26px,3.6vw,36px); max-width:22ch; margin:0 auto; }
-  .cta-band p{ color:var(--ink-soft); max-width:54ch; margin:16px auto 0; }
-  .cta-actions{ display:flex; gap:14px; justify-content:center; margin-top:28px; flex-wrap:wrap; }
 
   /* ---------- CONTACT ---------- */
   .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -247,9 +419,23 @@
   .footer-links a:hover{ color:var(--accent); }
   .footer-copy{ font-size:12.5px; color:var(--ink-faint); margin-top:6px; }
 
-  /* ---------- reveal ---------- */
+  /* ---------- reveal (sezioni) ---------- */
   .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
   .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- fade-up (titoli e descrizioni inline) ---------- */
+  .fade-up{
+    opacity:0; transform:translateY(22px);
+    transition:opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+  }
+  .fade-up.in{ opacity:1; transform:translateY(0); }
+  .fade-up[data-delay="1"]{ transition-delay:.08s; }
+  .fade-up[data-delay="2"]{ transition-delay:.16s; }
+  .fade-up[data-delay="3"]{ transition-delay:.24s; }
+  .fade-up[data-delay="4"]{ transition-delay:.32s; }
+  @media (prefers-reduced-motion: reduce){
+    .fade-up{ opacity:1; transform:none; transition:none; }
+  }
 </style>
 </head>
 <body>
@@ -260,8 +446,6 @@
     <ul class="nav-links">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#servizi">Servizi</a></li>
-      <li><a href="#metodo">Metodo</a></li>
-      <li><a href="#prezzi">Prezzi</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
     <a class="btn btn-primary btn-sm" href="https://wa.me/390000000000" target="_blank" rel="noopener">
@@ -276,10 +460,10 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow">Fai crescere il tuo progetto</span>
-        <h1>Gestione Immobiliare e digitale in Toscana.</h1>
-        <p class="hero-sub">Domnia gestisce affitti brevi, case vacanza e strutture ricettive in Toscana, con siti web, annunci e supporto operativo per più prenotazioni dirette.</p>
-        <div class="hero-actions">
+        <span class="eyebrow fade-up">Fai crescere il tuo progetto</span>
+        <h1 class="fade-up" data-delay="1">Gestione Immobiliare e digitale in Toscana.</h1>
+        <p class="hero-sub fade-up" data-delay="2">Domnia gestisce affitti brevi, case vacanza e strutture ricettive in Toscana, con siti web, annunci e supporto operativo per più prenotazioni dirette.</p>
+        <div class="hero-actions fade-up" data-delay="3">
           <a class="btn btn-primary" href="#servizi">Scopri i servizi</a>
           <a class="btn btn-ghost" href="#contatti">Contattaci</a>
         </div>
@@ -291,146 +475,38 @@
       </div>
 
       <div class="hero-visual">
-        <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrazione di un paesaggio toscano al tramonto, con cipressi e colline">
-          <defs>
-            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#FBEBCC"/>
-              <stop offset="55%" stop-color="#F5C98D"/>
-              <stop offset="100%" stop-color="#EE9F63"/>
-            </linearGradient>
-            <radialGradient id="sun" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#FFF3D6"/>
-              <stop offset="100%" stop-color="#FBCB86" stop-opacity="0"/>
-            </radialGradient>
-            <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#93A279"/>
-              <stop offset="100%" stop-color="#7C8E63"/>
-            </linearGradient>
-            <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#5F7A4C"/>
-              <stop offset="100%" stop-color="#4C673B"/>
-            </linearGradient>
-            <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#3B5741"/>
-              <stop offset="100%" stop-color="#2C4432"/>
-            </linearGradient>
-          </defs>
-
-          <rect width="640" height="480" fill="url(#sky)"/>
-          <circle cx="470" cy="230" r="130" fill="url(#sun)"/>
-          <circle cx="470" cy="230" r="46" fill="#FFF6E2"/>
-
-          <path d="M0,270 C120,235 220,290 340,255 C440,228 560,268 640,240 L640,480 L0,480 Z" fill="url(#hillFar)" opacity="0.85"/>
-          <path d="M0,330 C140,290 260,340 400,300 C500,275 580,310 640,290 L640,480 L0,480 Z" fill="url(#hillMid)"/>
-          <path d="M0,400 C160,365 300,410 420,375 C510,350 570,385 640,365 L640,480 L0,480 Z" fill="url(#hillNear)"/>
-
-          <g opacity="0.9">
-            <ellipse cx="150" cy="345" rx="10" ry="16" fill="#5F7A4C"/>
-            <ellipse cx="172" cy="352" rx="8" ry="13" fill="#7C8E63"/>
-            <ellipse cx="128" cy="352" rx="7" ry="12" fill="#7C8E63"/>
-          </g>
-
-          <g>
-            <path d="M508,300 C500,340 496,378 508,410 L516,410 C528,378 524,340 516,300 Z" fill="#2C4432"/>
-            <path d="M540,318 C534,352 531,384 540,410 L546,410 C555,384 552,352 546,318 Z" fill="#243A29"/>
-            <path d="M478,325 C473,356 470,384 478,410 L484,410 C492,384 489,356 484,325 Z" fill="#2C4432"/>
-            <path d="M566,332 C561,360 559,386 566,410 L571,410 C578,386 576,360 571,332 Z" fill="#243A29"/>
-            <rect x="510" y="408" width="4" height="10" fill="#4C673B"/>
-            <rect x="542" y="408" width="3" height="10" fill="#4C673B"/>
-            <rect x="480" y="408" width="3" height="10" fill="#4C673B"/>
-            <rect x="567" y="408" width="3" height="10" fill="#4C673B"/>
-          </g>
-
-          <rect width="640" height="480" fill="url(#sky)" opacity="0" />
-          <polygon points="0,0 640,0 640,60 0,140" fill="#FFF3D6" opacity="0.12"/>
-        </svg>
+        <img
+          src="images/hero-toscana.jpg"
+          alt="Terrazza in pietra di un casale toscano al tramonto, con vasi in terracotta, cipressi e vista sulle colline"
+          width="1600" height="1104" loading="eager" decoding="async"
+        >
       </div>
-    </div>
-  </section>
-
-  <section class="reveal" id="chi-siamo">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Chi siamo</span>
-        <h2>Due percorsi, un metodo condiviso</h2>
-      </div>
-      <div class="team-grid">
-        <div class="team-card">
-          <h3>Sviluppo web e direzione operativa</h3>
-          <p>Diplomato in Elettronica e Robotica, con esperienza nello sviluppo di siti web e soluzioni digitali per attività locali. Specializzato in strumenti che aumentano le prenotazioni e vendite dirette, riducendo la dipendenza dagli intermediari.</p>
-          <a class="wa-link" href="https://wa.me/390000000001" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 0 0-5.6 9.8L1.5 14.5l3.3-.9A6.5 6.5 0 1 0 8 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
-            WhatsApp Joel
-          </a>
-        </div>
-        <div class="team-card">
-          <h3>Property management e gestione cliente</h3>
-          <p>Esperienza diretta nella gestione di immobili per affitti brevi e nel settore dell'ospitalità in Toscana. Specializzato nella relazione con proprietari e ospiti, gestione prenotazioni, ottimizzazione degli annunci e sviluppo di canali di prenotazione diretta.</p>
-          <a class="wa-link" href="https://wa.me/390000000002" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 0 0-5.6 9.8L1.5 14.5l3.3-.9A6.5 6.5 0 1 0 8 1.5Z" stroke="currentColor" stroke-width="1.2"/></svg>
-            WhatsApp Leonardo
-          </a>
-        </div>
-      </div>
-      <p class="approach-line">Approccio pratico, diretto, orientato al risultato.</p>
     </div>
   </section>
 
   <section class="band-alt reveal">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Per chi lavoriamo</span>
-        <h2>Soluzioni costruite per realtà locali e ospitalità</h2>
+        <span class="eyebrow fade-up">Per chi lavoriamo</span>
+        <h2 class="fade-up" data-delay="1">Soluzioni costruite per realtà locali e ospitalità</h2>
       </div>
       <div class="chip-grid">
-        <div class="chip">Case vacanza</div>
-        <div class="chip">Appartamenti turistici</div>
-        <div class="chip">B&amp;B</div>
-        <div class="chip">Attività locali</div>
-        <div class="chip">Negozi</div>
-        <div class="chip">Professionisti</div>
+        <button type="button" class="chip" data-modal-open="modal-immobiliare">Gestione Immobiliare <span class="chip-more" aria-hidden="true">+</span></button>
+        <button type="button" class="chip" data-modal-open="modal-attivita">Attività Locali <span class="chip-more" aria-hidden="true">+</span></button>
+        <button type="button" class="chip" data-modal-open="modal-professionisti">Professionisti <span class="chip-more" aria-hidden="true">+</span></button>
       </div>
     </div>
   </section>
 
-  <section class="reveal">
+  <section class="reveal" id="servizi">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Cosa possiamo fare per te</span>
-        <h2>Sette modi in cui interveniamo</h2>
-      </div>
-      <div class="cap-list">
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Creare un sito professionale</strong> — da zero, su misura per la tua attività.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Ridurre la dipendenza</strong> da Airbnb e Booking con un canale diretto.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Gestire calendari e annunci</strong> su più piattaforme in sincronia.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Rispondere agli ospiti</strong> con comunicazione tempestiva e curata.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Ottimizzare Google Business Profile</strong> e la visibilità locale.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Curare social e contenuti</strong> con una strategia continuativa.</p></div>
-        <div class="cap-item"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><p><strong>Restyling di siti esistenti</strong> per renderli più rapidi e chiari.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band-alt reveal" id="servizi">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Servizi dettagliati</span>
-        <h2>Tre pilastri, un solo referente</h2>
+        <span class="eyebrow fade-up">Servizi dettagliati</span>
+        <h2 class="fade-up" data-delay="1">Due pilastri, un solo referente</h2>
       </div>
       <div class="service-grid">
         <div class="service-card">
           <span class="service-num">01</span>
-          <h3>Sito web</h3>
-          <p>Siti moderni e veloci, ottimizzati per la conversione: landing page, siti per case vacanza, siti per attività locali.</p>
-          <ul>
-            <li>Landing page</li>
-            <li>Siti per attività locali</li>
-            <li>Siti per case vacanza</li>
-            <li>Restyling di siti esistenti</li>
-          </ul>
-        </div>
-        <div class="service-card">
-          <span class="service-num">02</span>
           <h3>Property management</h3>
           <p>Gestione operativa e digitale completa degli affitti brevi: annunci, calendari e comunicazione con gli ospiti.</p>
           <ul>
@@ -439,152 +515,39 @@
             <li>Assistenza agli ospiti</li>
             <li>Setup e ottimizzazione annunci</li>
           </ul>
+          <button type="button" class="btn-strutture" data-modal-open="modal-strutture">
+            <span>Le nostre strutture in gestione</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
         <div class="service-card">
-          <span class="service-num">03</span>
+          <span class="service-num">02</span>
           <h3>Servizi Digitali</h3>
-          <p>SEO, ottimizzazione del profilo Google Business, gestione social e strategia dei contenuti.</p>
+          <p>Siti moderni e veloci più tutta la visibilità online: SEO locale, profilo Google Business, social e contenuti.</p>
           <ul>
+            <li>Landing page</li>
+            <li>Siti per attività locali</li>
+            <li>Siti per case vacanza</li>
+            <li>Restyling di siti esistenti</li>
             <li>SEO locale</li>
             <li>Google Business Profile</li>
             <li>Social management</li>
             <li>Strategia dei contenuti</li>
           </ul>
+          <button type="button" class="btn-strutture" data-modal-open="modal-casi">
+            <span>I nostri casi studio</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="reveal" id="metodo">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Metodo</span>
-        <h2>Sei fasi, sempre nello stesso ordine</h2>
-      </div>
-      <div class="method-list">
-        <div class="method-item"><span class="method-num">01</span><h4>Analisi</h4><p>Studiamo attività, mercato e concorrenza.</p></div>
-        <div class="method-item"><span class="method-num">02</span><h4>Strategia</h4><p>Definiamo obiettivi e canali prioritari.</p></div>
-        <div class="method-item"><span class="method-num">03</span><h4>Design</h4><p>Costruiamo l'identità visiva del progetto.</p></div>
-        <div class="method-item"><span class="method-num">04</span><h4>Sviluppo</h4><p>Realizziamo sito e strumenti digitali.</p></div>
-        <div class="method-item"><span class="method-num">05</span><h4>Pubblicazione</h4><p>Mettiamo tutto online e lo testiamo.</p></div>
-        <div class="method-item"><span class="method-num">06</span><h4>Gestione</h4><p>Seguiamo la crescita nel tempo.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band-alt reveal" id="portfolio">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Portfolio</span>
-        <h2>Due progetti, due problemi reali</h2>
-      </div>
-      <div class="case-grid">
-        <div class="case-card">
-          <div class="case-media"><span>Attività locale</span></div>
-          <div class="case-body">
-            <h3>Dal Martini</h3>
-            <p class="case-meta">Fruttivendolo di famiglia, dal 1946</p>
-            <div class="case-row"><span class="label">Problema</span><p>Attività storica ma poca presenza digitale.</p></div>
-            <div class="case-row"><span class="label">Soluzione</span><p>Sito mobile-first con presentazione dei prodotti e QR code in negozio.</p></div>
-          </div>
-        </div>
-        <div class="case-card">
-          <div class="case-media"><span>Casa vacanza</span></div>
-          <div class="case-body">
-            <h3>Il Piccolo Nido</h3>
-            <p class="case-meta">Appartamento turistico</p>
-            <div class="case-row"><span class="label">Problema</span><p>Dipendenza dalle piattaforme di prenotazione.</p></div>
-            <div class="case-row"><span class="label">Soluzione</span><p>Canale di prenotazione diretto e posizionamento premium.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="reveal" id="prezzi">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow">Prezzi</span>
-        <h2>Struttura chiara, su misura per il progetto</h2>
-      </div>
-
-      <div class="price-group">
-        <div class="price-group-title">Web services</div>
-        <div class="price-grid">
-          <div class="price-card">
-            <h4>Landing Page</h4>
-            <div class="price-value">da €390</div>
-            <p class="desc">Una pagina, un obiettivo: presentare l'attività e generare contatti.</p>
-          </div>
-          <div class="price-card">
-            <h4>Sito attività locale</h4>
-            <div class="price-value">da €690</div>
-            <p class="desc">Struttura multi-pagina per negozi e professionisti.</p>
-          </div>
-          <div class="price-card featured">
-            <h4>Sito casa vacanza</h4>
-            <div class="price-value">da €890</div>
-            <p class="desc">Sito con motore di prenotazione diretta e galleria fotografica.</p>
-          </div>
-          <div class="price-card">
-            <h4>Restyling sito</h4>
-            <div class="price-value">da €490</div>
-            <p class="desc">Rinnoviamo un sito esistente in struttura e velocità.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="price-group">
-        <div class="price-group-title">Property management</div>
-        <div class="price-grid cols-3">
-          <div class="price-card">
-            <h4>Gestione base</h4>
-            <div class="price-value">da €90<small>/mese</small></div>
-            <p class="desc">Monitoraggio annunci e calendari su una piattaforma.</p>
-          </div>
-          <div class="price-card">
-            <h4>Setup annunci</h4>
-            <div class="price-value">da €150</div>
-            <p class="desc">Creazione e ottimizzazione iniziale degli annunci.</p>
-          </div>
-          <div class="price-card">
-            <h4>Gestione operativa</h4>
-            <div class="price-value">% sul fatturato</div>
-            <p class="desc">Gestione completa: calendari, ospiti, comunicazioni.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="price-group">
-        <div class="price-group-title">Pacchetti combinati</div>
-        <div class="price-grid cols-3">
-          <div class="price-card">
-            <h4>Starter</h4>
-            <div class="price-value">da €790</div>
-            <p class="desc">Sito + setup annunci, per chi parte da zero.</p>
-          </div>
-          <div class="price-card featured">
-            <h4>Growth</h4>
-            <div class="price-value">da €1.390</div>
-            <p class="desc">Sito + gestione base + ottimizzazione locale.</p>
-          </div>
-          <div class="price-card">
-            <h4>Premium</h4>
-            <div class="price-value">su misura</div>
-            <p class="desc">Sito, gestione operativa e strategia digitale continuativa.</p>
-          </div>
-        </div>
-      </div>
-
-      <p class="price-note">I prezzi sono indicativi e vengono confermati dopo l'analisi del progetto.</p>
     </div>
   </section>
 
   <section class="band-alt reveal">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Perché sceglierci</span>
-        <h2>Sei ragioni per lavorare con noi</h2>
+        <span class="eyebrow fade-up">Perché sceglierci</span>
+        <h2 class="fade-up" data-delay="1">Sei ragioni per lavorare con noi</h2>
       </div>
       <div class="why-grid">
         <div class="why-item"><h4>Approccio locale</h4><p>Conosciamo il territorio toscano e chi lo vive ogni giorno.</p></div>
@@ -599,34 +562,24 @@
 
   <section class="consult reveal">
     <div class="wrap">
-      <span class="eyebrow">Primo passo</span>
-      <h2>Prima consulenza conoscitiva gratuita</h2>
-      <p>Raccontaci la tua attività: in trenta minuti capiamo insieme dove vale la pena intervenire per primo.</p>
+      <h2 class="fade-up">Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
+      <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
       <a class="btn btn-primary" href="https://wa.me/390000000000?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
     </div>
   </section>
 
-  <section class="cta-band reveal">
-    <div class="wrap">
-      <h2>Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
-      <p>Che tu stia iniziando da zero o voglia rivedere quello che hai già, partiamo da un confronto diretto.</p>
-      <div class="cta-actions">
-        <a class="btn btn-primary" href="https://wa.me/390000000000" target="_blank" rel="noopener">Scrivici su WhatsApp</a>
-        <a class="btn btn-ghost" href="#portfolio">Vedi il portfolio</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="band-alt reveal" id="contatti">
-    <div class="wrap">
+  <section class="reveal" id="chi-siamo">
+    <div class="wrap" id="contatti">
       <div class="section-head">
-        <span class="eyebrow">Contatti</span>
-        <h2>Scrivi direttamente a chi segue il tuo progetto</h2>
+        <span class="eyebrow fade-up">Chi siamo</span>
+        <h2 class="fade-up" data-delay="1">Due percorsi, un metodo condiviso</h2>
       </div>
-      <div class="contact-grid">
-        <div class="contact-card">
+      <p class="intro-text fade-up" data-delay="2"><strong>Domnia</strong> nasce dall'incrocio tra <em>domus</em> (casa) e <em>omnia</em> (tutto): vogliamo essere il riferimento unico per chi ha una proprietà immobiliare e vuole gestirla in maniera moderna, trasparente e profittevole. Non facciamo promesse, facciamo crescere il tuo patrimonio e la tua attività con soluzioni concrete e risultati misurabili.</p>
+      <div class="team-grid">
+        <div class="team-card">
           <h3>Joel Novo Navarrete</h3>
           <span class="contact-role">Sviluppo web &amp; soluzioni digitali</span>
+          <p>Diplomato in Elettronica e Robotica, con esperienza nello sviluppo di siti web e soluzioni digitali per attività locali. Specializzato in strumenti che aumentano le prenotazioni e vendite dirette, riducendo la dipendenza dagli intermediari.</p>
           <ul class="contact-list">
             <li><a href="mailto:joel@domnia.it"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>joel@domnia.it</a></li>
             <li><a href="tel:+390000000001"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 000 000 0001</a></li>
@@ -634,9 +587,10 @@
             <li><a href="https://wa.me/390000000001" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>WhatsApp diretto</a></li>
           </ul>
         </div>
-        <div class="contact-card">
+        <div class="team-card">
           <h3>Leonardo Fogli</h3>
           <span class="contact-role">Property management &amp; hospitality</span>
+          <p>Esperienza diretta nella gestione di immobili per affitti brevi e nel settore dell'ospitalità in Toscana. Specializzato nella relazione con proprietari e ospiti, gestione prenotazioni, ottimizzazione degli annunci e sviluppo di canali di prenotazione diretta.</p>
           <ul class="contact-list">
             <li><a href="mailto:leonardo@domnia.it"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>leonardo@domnia.it</a></li>
             <li><a href="tel:+390000000002"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 000 000 0002</a></li>
@@ -645,6 +599,7 @@
           </ul>
         </div>
       </div>
+      <p class="approach-line">Approccio pratico, diretto, orientato al risultato.</p>
     </div>
   </section>
 
@@ -661,17 +616,294 @@
       <ul class="footer-links">
         <li><a href="#chi-siamo">Chi siamo</a></li>
         <li><a href="#servizi">Servizi</a></li>
-        <li><a href="#metodo">Metodo</a></li>
-        <li><a href="#prezzi">Prezzi</a></li>
         <li><a href="#contatti">Contatti</a></li>
       </ul>
     </div>
   </div>
 </footer>
 
+<dialog class="modal" id="modal-immobiliare" aria-labelledby="title-immobiliare">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
+    <span class="eyebrow">Gestione Immobiliare</span>
+    <h3 id="title-immobiliare">Due formule di gestione</h3>
+    <p class="modal-lead">Scegliamo insieme la formula più adatta all'immobile e a quanto vuoi essere coinvolto.</p>
+    <div class="option-grid">
+      <div class="option-card">
+        <h4>Affitti Brevi</h4>
+        <p>Case vacanza, appartamenti turistici e B&amp;B: soggiorni di pochi giorni, seguiti dall'annuncio al check-out.</p>
+        <ul>
+          <li>Calendari e annunci sincronizzati su più piattaforme</li>
+          <li>Risposte agli ospiti tempestive e curate</li>
+          <li>Canale di prenotazione diretta, per ridurre la dipendenza da Airbnb e Booking</li>
+        </ul>
+      </div>
+      <div class="option-card">
+        <h4>Affitti Transitori</h4>
+        <p>Contratti a medio termine per studenti, lavoratori fuori sede e trasferte: meno turnover, entrate più stabili.</p>
+        <ul>
+          <li>Selezione e verifica degli inquilini</li>
+          <li>Contratti e adempimenti seguiti da noi</li>
+          <li>Gestione ordinaria e rapporto diretto con il proprietario</li>
+        </ul>
+      </div>
+    </div>
+    <details class="modal-steps">
+      <summary>Come lavoriamo</summary>
+      <div class="step-list">
+        <div class="step"><span class="step-num">01</span><p><strong>Analisi</strong> — immobile, zona e concorrenza.</p></div>
+        <div class="step"><span class="step-num">02</span><p><strong>Strategia</strong> — prezzi, canali e posizionamento.</p></div>
+        <div class="step"><span class="step-num">03</span><p><strong>Setup</strong> — annunci, foto e calendari.</p></div>
+        <div class="step"><span class="step-num">04</span><p><strong>Pubblicazione</strong> — online su tutti i canali.</p></div>
+        <div class="step"><span class="step-num">05</span><p><strong>Gestione</strong> — ospiti, comunicazioni e operatività.</p></div>
+        <div class="step"><span class="step-num">06</span><p><strong>Crescita</strong> — seguiamo i risultati nel tempo.</p></div>
+      </div>
+    </details>
+  </div>
+</dialog>
+
+<dialog class="modal modal-fullscreen" id="modal-strutture" aria-labelledby="title-strutture">
+  <div class="modal-inner">
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Le nostre strutture in gestione</span>
+        <h3 id="title-strutture">Immobili gestiti in Versilia</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+      <p class="fs-lead">Entrambe le strutture sono gestite con il sistema <strong>Full Hybrid</strong>: affitti brevi durante la stagione estiva e affitti transitori nel periodo invernale, per massimizzare la rendita tutto l'anno.</p>
+      <div class="fs-prop-list">
+        <div class="fs-prop-card">
+          <div class="prop-gallery">
+            <div class="fs-prop-slides" id="gallery-torre">
+              <img src="images/torre-del-lago-1.jpg" alt="Appartamento Torre del Lago – camera" loading="lazy">
+              <img src="images/torre-del-lago-2.jpg" alt="Appartamento Torre del Lago – seconda camera" loading="lazy">
+            </div>
+            <div class="prop-nav">
+              <button type="button" class="prop-btn" data-gallery="gallery-torre" data-dir="-1" aria-label="Foto precedente">&#8592;</button>
+              <button type="button" class="prop-btn" data-gallery="gallery-torre" data-dir="1" aria-label="Foto successiva">&#8594;</button>
+            </div>
+            <div class="prop-dots" id="dots-torre">
+              <button type="button" class="prop-dot active" data-gallery="gallery-torre" data-idx="0" aria-label="Foto 1"></button>
+              <button type="button" class="prop-dot" data-gallery="gallery-torre" data-idx="1" aria-label="Foto 2"></button>
+            </div>
+          </div>
+          <div class="prop-body">
+            <span class="prop-tag">Full Hybrid · Torre del Lago</span>
+            <h4>Appartamento Torre del Lago</h4>
+            <p>Appartamento a Torre del Lago Puccini, cuore della Versilia. Affitti brevi in alta stagione, contratti transitori da settembre a giugno per studenti e lavoratori, per una rendita continua tutto l'anno.</p>
+          </div>
+        </div>
+        <div class="fs-prop-card">
+          <div class="prop-gallery">
+            <div class="fs-prop-slides" id="gallery-lido">
+              <img src="images/lido-camaiore-1.jpg" alt="Villetta Lido di Camaiore – terrazza" loading="lazy">
+              <img src="images/lido-camaiore-2.jpg" alt="Villetta Lido di Camaiore – esterno" loading="lazy">
+            </div>
+            <div class="prop-nav">
+              <button type="button" class="prop-btn" data-gallery="gallery-lido" data-dir="-1" aria-label="Foto precedente">&#8592;</button>
+              <button type="button" class="prop-btn" data-gallery="gallery-lido" data-dir="1" aria-label="Foto successiva">&#8594;</button>
+            </div>
+            <div class="prop-dots" id="dots-lido">
+              <button type="button" class="prop-dot active" data-gallery="gallery-lido" data-idx="0" aria-label="Foto 1"></button>
+              <button type="button" class="prop-dot" data-gallery="gallery-lido" data-idx="1" aria-label="Foto 2"></button>
+            </div>
+          </div>
+          <div class="prop-body">
+            <span class="prop-tag">Full Hybrid · Lido di Camaiore</span>
+            <h4>Villetta Indipendente Lido di Camaiore</h4>
+            <p>Villetta con terrazza privata a Lido di Camaiore. Stessa formula ibrida: massima occupazione in estate e continuità di reddito in inverno con affitti transitori, eliminando i mesi morti.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal modal-fullscreen" id="modal-casi" aria-labelledby="title-casi">
+  <div class="modal-inner">
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Servizi digitali</span>
+        <h3 id="title-casi">I nostri casi studio</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+      <p class="fs-lead">Due progetti, due problemi reali. Ogni sito nasce da un'esigenza concreta del cliente: puoi visitarli online e vedere il risultato finito.</p>
+      <div class="fs-case-list">
+
+        <div class="fs-case-card">
+          <div class="case-window">
+            <div class="case-chrome">
+              <span class="case-dot"></span><span class="case-dot"></span><span class="case-dot"></span>
+              <span class="case-url">dalmartini.netlify.app</span>
+            </div>
+            <div class="case-shot">
+              <span class="case-shot-kind">Attività locale</span>
+              <h4 class="case-shot-name">Dal Martini</h4>
+            </div>
+          </div>
+          <div class="fs-case-body">
+            <p class="case-sub">Negozio ortofrutticolo di famiglia, dal 1946</p>
+            <div class="case-rows">
+              <div class="case-row">
+                <span class="label">Problema</span>
+                <p>Attività storica e conosciuta in zona, ma senza nessuna presenza digitale: chi la cercava online non trovava nulla.</p>
+              </div>
+              <div class="case-row">
+                <span class="label">Soluzione</span>
+                <p>Sito mobile-first con presentazione dei prodotti e QR code esposto in negozio, per collegare il banco al canale online.</p>
+              </div>
+            </div>
+            <div class="case-visit">
+              <a href="https://dalmartini.netlify.app/" target="_blank" rel="noopener noreferrer">
+                <span>Visita il sito</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 10.5L10.5 5.5M10.5 5.5H6.5M10.5 5.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="fs-case-card">
+          <div class="case-window">
+            <div class="case-chrome">
+              <span class="case-dot"></span><span class="case-dot"></span><span class="case-dot"></span>
+              <span class="case-url">ilpiccolonido-versilia.com</span>
+            </div>
+            <div class="case-shot">
+              <span class="case-shot-kind">Casa vacanza</span>
+              <h4 class="case-shot-name">Il Piccolo Nido</h4>
+            </div>
+          </div>
+          <div class="fs-case-body">
+            <p class="case-sub">Appartamento turistico in Versilia</p>
+            <div class="case-rows">
+              <div class="case-row">
+                <span class="label">Problema</span>
+                <p>Dipendenza totale dalle piattaforme di prenotazione, con commissioni su ogni soggiorno e nessun rapporto diretto con l'ospite.</p>
+              </div>
+              <div class="case-row">
+                <span class="label">Soluzione</span>
+                <p>Canale di prenotazione diretto e posizionamento premium, per ridurre le commissioni e costruire un contatto proprio con i clienti.</p>
+              </div>
+            </div>
+            <div class="case-visit">
+              <a href="https://ilpiccolonido-versilia.com/" target="_blank" rel="noopener noreferrer">
+                <span>Visita il sito</span>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 10.5L10.5 5.5M10.5 5.5H6.5M10.5 5.5V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal" id="modal-attivita" aria-labelledby="title-attivita">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
+    <span class="eyebrow">Attività Locali</span>
+    <h3 id="title-attivita">Farsi trovare nel proprio territorio</h3>
+    <p class="modal-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno.</p>
+    <div class="option-grid single">
+      <div class="option-card">
+        <h4>Cosa facciamo</h4>
+        <p>Sito vetrina, profilo Google Business ottimizzato e contenuti curati, per farti trovare da chi ti cerca in zona.</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal" id="modal-professionisti" aria-labelledby="title-professionisti">
+  <div class="modal-inner">
+    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
+    <span class="eyebrow">Professionisti</span>
+    <h3 id="title-professionisti">Una presenza chiara e credibile</h3>
+    <p class="modal-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti.</p>
+    <div class="option-grid single">
+      <div class="option-card">
+        <h4>Cosa facciamo</h4>
+        <p>Sito professionale, presentazione dei servizi e canali di contatto diretti, senza template riconoscibili.</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 <script>
   (function(){
-    var els = document.querySelectorAll('.reveal');
+    document.querySelectorAll('[data-modal-open]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var dlg = document.getElementById(btn.getAttribute('data-modal-open'));
+        if(dlg && typeof dlg.showModal === 'function'){ dlg.showModal(); }
+      });
+    });
+    document.querySelectorAll('.modal').forEach(function(dlg){
+      dlg.addEventListener('click', function(e){
+        if(e.target === dlg){ dlg.close(); }
+      });
+      var close = dlg.querySelector('[data-modal-close]');
+      if(close){ close.addEventListener('click', function(){ dlg.close(); }); }
+    });
+  })();
+
+  (function(){
+    var state = {};
+    function goTo(galleryId, idx){
+      var slides = document.getElementById(galleryId);
+      if(!slides) return;
+      var imgs = slides.querySelectorAll('img');
+      var total = imgs.length;
+      idx = (idx + total) % total;
+      state[galleryId] = idx;
+      slides.scrollTo({ left: idx * slides.offsetWidth, behavior:'smooth' });
+      document.querySelectorAll('.prop-dot[data-gallery="'+galleryId+'"]').forEach(function(d,i){
+        d.classList.toggle('active', i === idx);
+      });
+    }
+    document.querySelectorAll('.prop-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var gid = btn.getAttribute('data-gallery');
+        var dir = parseInt(btn.getAttribute('data-dir'));
+        goTo(gid, (state[gid] || 0) + dir);
+      });
+    });
+    document.querySelectorAll('.prop-dot').forEach(function(dot){
+      dot.addEventListener('click', function(){
+        goTo(dot.getAttribute('data-gallery'), parseInt(dot.getAttribute('data-idx')));
+      });
+    });
+    document.querySelectorAll('.prop-slides, .fs-prop-slides').forEach(function(sl){
+      state[sl.id] = 0;
+    });
+    // Blocca lo scroll di fondo mentre un modale a schermo intero e' aperto.
+    // Osserviamo l'attributo "open" invece degli eventi close/cancel: in alcuni
+    // browser quegli eventi non scattano e la pagina resterebbe bloccata.
+    var fsModals = document.querySelectorAll('.modal-fullscreen');
+    function syncScrollLock(){
+      var qualcunoAperto = false;
+      fsModals.forEach(function(m){ if(m.open){ qualcunoAperto = true; } });
+      document.body.style.overflow = qualcunoAperto ? 'hidden' : '';
+    }
+    if('MutationObserver' in window){
+      fsModals.forEach(function(fsModal){
+        new MutationObserver(syncScrollLock).observe(fsModal, { attributes:true, attributeFilter:['open'] });
+      });
+    }
+    fsModals.forEach(function(fsModal){
+      fsModal.addEventListener('cancel', syncScrollLock);
+      fsModal.addEventListener('close', syncScrollLock);
+    });
+  })();
+
+  (function(){
+    document.querySelectorAll('.hero .fade-up').forEach(function(el, i){
+      setTimeout(function(){ el.classList.add('in'); }, 80 + i * 80);
+    });
+    var els = document.querySelectorAll('.reveal, .fade-up:not(.in)');
     if(!('IntersectionObserver' in window)){ els.forEach(function(e){ e.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
