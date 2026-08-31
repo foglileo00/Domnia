@@ -329,9 +329,15 @@
   }
   .case-shot{
     height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    background:linear-gradient(140deg,var(--accent-tint),var(--bg-alt));
-    text-align:center; padding:22px;
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    text-align:center; padding:22px; position:relative;
   }
+  .case-shot::before{
+    content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(140deg,rgba(255,255,255,0.8),rgba(255,255,255,0.85));
+    z-index:0;
+  }
+  .case-shot > *{ position:relative; z-index:1; }
   @media (max-width:640px){ .case-shot{ height:170px; } }
   .case-shot-name{ font-family:'Fraunces',serif; font-size:23px; font-weight:600; color:var(--accent-deep); margin:0; }
   .case-shot-kind{
@@ -740,7 +746,7 @@
               <span class="case-dot"></span><span class="case-dot"></span><span class="case-dot"></span>
               <span class="case-url">dalmartini.netlify.app</span>
             </div>
-            <div class="case-shot">
+            <div class="case-shot" style="background-image:url('images/dal-martini-logo.png');">
               <span class="case-shot-kind">Attività locale</span>
               <h4 class="case-shot-name">Dal Martini</h4>
             </div>
@@ -772,7 +778,7 @@
               <span class="case-dot"></span><span class="case-dot"></span><span class="case-dot"></span>
               <span class="case-url">ilpiccolonido-versilia.com</span>
             </div>
-            <div class="case-shot">
+            <div class="case-shot" style="background-image:url('images/piccolo-nido-logo.png');">
               <span class="case-shot-kind">Casa vacanza</span>
               <h4 class="case-shot-name">Il Piccolo Nido</h4>
             </div>
