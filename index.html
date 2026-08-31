@@ -333,18 +333,11 @@
     background-position:center; background-repeat:no-repeat;
     background-size:cover;
   }
+  .case-shot-kind, .case-shot-name{ display:none; }
   @media (max-width:640px){ .case-shot{ height:220px; } }
   /* Marchio quadrato su fondo pieno: lo teniamo intero e coloriamo il riquadro
      con lo stesso crema del logo, cosi' le bande laterali non si vedono. */
   .case-shot.logo-contain{ background-size:contain; }
-  .case-shot-kind, .case-shot-name{ display:none; }
-  @media (max-width:640px){ .case-shot{ height:170px; } }
-  .case-shot-name{ font-family:'Fraunces',serif; font-size:23px; font-weight:600; color:var(--accent-deep); margin:0; }
-  .case-shot-kind{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.09em;
-    text-transform:uppercase; color:var(--accent); background:var(--surface);
-    border:1px solid var(--line); border-radius:100px; padding:4px 11px;
-  }
   .fs-case-body{ padding:24px 24px 26px; display:flex; flex-direction:column; flex:1; }
   .case-sub{ font-size:13px; color:var(--ink-faint); margin:0; }
   .case-rows{ display:flex; flex-direction:column; gap:14px; margin:20px 0 0; }
@@ -391,12 +384,12 @@
   .case-row .label{ font-family:'JetBrains Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:var(--coral); }
   .case-row p{ margin:5px 0 0; font-size:14.5px; color:var(--ink-soft); }
 
-  /* ---------- WHY ---------- */
-  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px 28px; }
-  @media (max-width:820px){ .why-grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:520px){ .why-grid{ grid-template-columns:1fr; } }
-  .why-item h4{ font-family:'Fraunces',serif; font-weight:600; font-size:17px; }
-  .why-item p{ font-size:14px; color:var(--ink-soft); margin-top:6px; }
+  /* ---------- FASCIA VIDEO ---------- */
+  .video-band{ padding:0; background:var(--ink); }
+  .band-video{
+    display:block; width:100%;
+    height:clamp(260px,52vh,520px); object-fit:cover;
+  }
 
   /* ---------- CONSULT / CTA bands ---------- */
   .consult{ background:var(--accent); color:#FBF8F1; text-align:center; }
@@ -549,21 +542,13 @@
     </div>
   </section>
 
-  <section class="band-alt reveal">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow fade-up">Perché sceglierci</span>
-        <h2 class="fade-up" data-delay="1">Sei ragioni per lavorare con noi</h2>
-      </div>
-      <div class="why-grid">
-        <div class="why-item"><h4>Approccio locale</h4><p>Conosciamo il territorio toscano e chi lo vive ogni giorno.</p></div>
-        <div class="why-item"><h4>Mobile-first</h4><p>Ogni progetto nasce pensando prima allo schermo del telefono.</p></div>
-        <div class="why-item"><h4>Contatto diretto</h4><p>Parli sempre con chi lavora davvero al tuo progetto.</p></div>
-        <div class="why-item"><h4>Stile professionale</h4><p>Un'immagine curata, senza template riconoscibili.</p></div>
-        <div class="why-item"><h4>Gestione reale</h4><p>Non solo consigli: operiamo concretamente sui tuoi canali.</p></div>
-        <div class="why-item"><h4>Crescita progressiva</h4><p>Costruiamo passo dopo passo, senza promesse gonfiate.</p></div>
-      </div>
-    </div>
+  <section class="video-band reveal" aria-label="Il territorio in cui lavoriamo">
+    <video
+      class="band-video"
+      src="video/domnia-presentazione.mp4"
+      autoplay muted loop playsinline preload="metadata"
+      aria-label="Ripresa aerea di un casale toscano tra le colline, con cipressi e piscina"
+    ></video>
   </section>
 
   <section class="consult reveal">
@@ -704,8 +689,8 @@
         <div class="fs-prop-card">
           <div class="prop-gallery">
             <div class="fs-prop-slides" id="gallery-lido">
-              <img src="images/lido-camaiore-1.jpg" alt="Villetta Lido di Camaiore – terrazza" loading="lazy">
               <img src="images/lido-camaiore-2.jpg" alt="Villetta Lido di Camaiore – esterno" loading="lazy">
+              <img src="images/lido-camaiore-1.jpg" alt="Villetta Lido di Camaiore – terrazza" loading="lazy">
             </div>
             <div class="prop-nav">
               <button type="button" class="prop-btn" data-gallery="gallery-lido" data-dir="-1" aria-label="Foto precedente">&#8592;</button>
@@ -911,6 +896,18 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function(e){ io.observe(e); });
+  })();
+
+  (function(){
+    // Chi ha chiesto meno animazioni nel sistema operativo non si vede partire
+    // il video da solo: lo fermiamo e gli diamo i comandi per avviarlo lui.
+    if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+    document.querySelectorAll('.band-video').forEach(function(v){
+      v.removeAttribute('autoplay');
+      v.removeAttribute('loop');
+      v.setAttribute('controls','');
+      v.pause();
+    });
   })();
 </script>
 
