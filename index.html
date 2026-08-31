@@ -356,6 +356,18 @@
   .case-visit svg{ transition:transform .18s; }
   .case-visit a:hover svg{ transform:translate(2px,-2px); }
 
+  /* Scorciatoie nella sezione servizi, in attesa dei nuovi contenuti. */
+  .servizi-scorciatoie{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .servizi-scorciatoie{ grid-template-columns:1fr; } }
+  .servizi-scorciatoie .btn-strutture{ margin-top:0; }
+
+  /* Divide il corpo di un modale in blocchi tematici. */
+  .fs-sub{
+    font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500;
+    text-transform:uppercase; letter-spacing:0.09em; color:var(--accent);
+    margin:40px 0 0; padding-top:28px; border-top:1px solid var(--line);
+  }
+
   /* ---------- SERVICES pillars ---------- */
   .service-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
   @media (max-width:900px){ .service-grid{ grid-template-columns:1fr; } }
@@ -514,41 +526,19 @@
         <span class="eyebrow fade-up">Servizi dettagliati</span>
         <h2 class="fade-up" data-delay="1">Due pilastri, un solo referente</h2>
       </div>
-      <div class="service-grid">
-        <div class="service-card">
-          <span class="service-num">01</span>
-          <h3>Property management</h3>
-          <p>Gestione operativa e digitale completa degli affitti brevi: annunci, calendari e comunicazione con gli ospiti.</p>
-          <ul>
-            <li>Gestione Airbnb / Booking</li>
-            <li>Sincronizzazione calendari</li>
-            <li>Assistenza agli ospiti</li>
-            <li>Setup e ottimizzazione annunci</li>
-          </ul>
-          <button type="button" class="btn-strutture" data-modal-open="modal-strutture">
-            <span>Le nostre strutture in gestione</span>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-        <div class="service-card">
-          <span class="service-num">02</span>
-          <h3>Servizi Digitali</h3>
-          <p>Siti moderni e veloci più tutta la visibilità online: SEO locale, profilo Google Business, social e contenuti.</p>
-          <ul>
-            <li>Landing page</li>
-            <li>Siti per attività locali</li>
-            <li>Siti per case vacanza</li>
-            <li>Restyling di siti esistenti</li>
-            <li>SEO locale</li>
-            <li>Google Business Profile</li>
-            <li>Social management</li>
-            <li>Strategia dei contenuti</li>
-          </ul>
-          <button type="button" class="btn-strutture" data-modal-open="modal-casi">
-            <span>I nostri casi studio</span>
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
+      <!-- Sezione in attesa di nuovi contenuti. I due pulsanti restano qui
+           perche' sono le uniche vie d'accesso ai modali a schermo intero
+           delle strutture in gestione e dei casi studio: togliendoli, quelle
+           due schermate diventerebbero irraggiungibili. -->
+      <div class="servizi-scorciatoie">
+        <button type="button" class="btn-strutture" data-modal-open="modal-strutture">
+          <span>Le nostre strutture in gestione</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="btn-strutture" data-modal-open="modal-casi">
+          <span>I nostri casi studio</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </div>
   </section>
@@ -633,7 +623,7 @@
       <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
     </div>
     <div class="fs-body">
-    <p class="fs-lead">Scegliamo insieme la formula più adatta all'immobile e a quanto vuoi essere coinvolto.</p>
+    <p class="fs-lead">Ci occupiamo dell'immobile dall'inizio alla fine: annuncio, calendari, ospiti e presenza online. Tu scegli la formula più adatta alla casa e a quanto vuoi essere coinvolto, al resto pensiamo noi.</p>
     <div class="option-grid">
       <div class="option-card">
         <h4>Affitti Brevi</h4>
@@ -654,6 +644,30 @@
         </ul>
       </div>
     </div>
+    <h4 class="fs-sub">Cosa comprende la gestione</h4>
+    <div class="option-grid">
+      <div class="option-card">
+        <h4>Operatività quotidiana</h4>
+        <p>La parte che porta via tempo e che non vorresti fare: la togliamo dal tuo tavolo e la seguiamo ogni giorno.</p>
+        <ul>
+          <li>Gestione degli annunci su Airbnb e Booking</li>
+          <li>Sincronizzazione dei calendari, per non rischiare doppie prenotazioni</li>
+          <li>Assistenza agli ospiti prima, durante e dopo il soggiorno</li>
+          <li>Setup e ottimizzazione continua degli annunci</li>
+        </ul>
+      </div>
+      <div class="option-card">
+        <h4>Presenza digitale della casa</h4>
+        <p>Un immobile che vive solo sulle piattaforme paga commissioni su ogni notte. Gli costruiamo un canale suo.</p>
+        <ul>
+          <li>Sito dedicato alla casa vacanza, veloce e pensato per il telefono</li>
+          <li>Richiesta di prenotazione diretta, senza intermediari</li>
+          <li>Descrizioni e foto curate, coerenti su tutti i canali</li>
+          <li>Posizionamento sulle ricerche di zona</li>
+        </ul>
+      </div>
+    </div>
+
     <details class="modal-steps">
       <summary>Come lavoriamo</summary>
       <div class="step-list">
@@ -814,11 +828,45 @@
       <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
     </div>
     <div class="fs-body">
-      <p class="fs-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno.</p>
-      <div class="option-grid single">
+      <p class="fs-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno. Chi ti cerca dal telefono, a pochi passi da te, deve trovarti: nome, orari, indirizzo e un'immagine che ti somigli.</p>
+      <div class="option-grid">
         <div class="option-card">
-          <h4>Cosa facciamo</h4>
-          <p>Sito vetrina, profilo Google Business ottimizzato e contenuti curati, per farti trovare da chi ti cerca in zona.</p>
+          <h4>Il sito della tua attività</h4>
+          <p>Una vetrina essenziale che si apre in fretta anche sotto rete mobile, perché quasi tutti ti cercheranno dal telefono.</p>
+          <ul>
+            <li>Sito per attività locali, pensato prima per lo schermo del telefono</li>
+            <li>Prodotti o servizi presentati con chiarezza</li>
+            <li>Orari, indirizzo e contatti sempre in vista</li>
+            <li>QR code da esporre in negozio, per collegare il banco al sito</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Farsi trovare in zona</h4>
+          <p>Il grosso delle ricerche locali finisce su Google Maps, non su un motore di ricerca. È lì che bisogna esserci.</p>
+          <ul>
+            <li>SEO locale sulle ricerche del tuo territorio</li>
+            <li>Profilo Google Business completo e aggiornato</li>
+            <li>Foto, categorie e orari curati nel dettaglio</li>
+            <li>Gestione delle recensioni e delle risposte</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Contenuti e social</h4>
+          <p>Un profilo abbandonato da mesi comunica più di quanto pensi. Meglio pochi contenuti, ma costanti.</p>
+          <ul>
+            <li>Social management con un ritmo di pubblicazione sostenibile</li>
+            <li>Strategia dei contenuti costruita sulla tua stagionalità</li>
+            <li>Foto e testi coerenti con l'insegna</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Rimettere in sesto quello che c'è</h4>
+          <p>Se un sito esiste già, spesso non serve rifarlo da capo: va reso leggibile, veloce e aggiornabile.</p>
+          <ul>
+            <li>Restyling di siti esistenti</li>
+            <li>Recupero della velocità di caricamento</li>
+            <li>Riscrittura dei testi poco chiari</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -835,11 +883,44 @@
       <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
     </div>
     <div class="fs-body">
-      <p class="fs-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti.</p>
-      <div class="option-grid single">
+      <p class="fs-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti. Chi valuta di affidarti un incarico ti cerca online prima di scriverti: quello che trova è la tua prima impressione.</p>
+      <div class="option-grid">
         <div class="option-card">
-          <h4>Cosa facciamo</h4>
-          <p>Sito professionale, presentazione dei servizi e canali di contatto diretti, senza template riconoscibili.</p>
+          <h4>Il tuo sito professionale</h4>
+          <p>Un'immagine curata, costruita su misura: niente modelli riconoscibili, già visti su decine di altri siti.</p>
+          <ul>
+            <li>Presentazione chiara di chi sei e di cosa fai</li>
+            <li>Servizi descritti senza gergo inutile</li>
+            <li>Percorsi e competenze messi in evidenza</li>
+            <li>Struttura leggibile anche dal telefono</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Landing page</h4>
+          <p>Una pagina sola, con un solo obiettivo: utile per un servizio specifico, un'iniziativa o una campagna.</p>
+          <ul>
+            <li>Messaggio concentrato su una singola richiesta</li>
+            <li>Modulo di contatto essenziale</li>
+            <li>Pagina indipendente dal resto del sito</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Farsi contattare</h4>
+          <p>Un sito che non genera richieste è una brochure. I canali di contatto devono essere immediati.</p>
+          <ul>
+            <li>Contatto diretto via email, telefono e WhatsApp</li>
+            <li>Modulo per le richieste, con i campi ridotti al minimo</li>
+            <li>Presenza sulle ricerche di zona</li>
+          </ul>
+        </div>
+        <div class="option-card">
+          <h4>Restyling di siti esistenti</h4>
+          <p>Se hai già un sito ma non lo mostreresti a un cliente, di solito si recupera invece di ripartire da zero.</p>
+          <ul>
+            <li>Rinnovo grafico sull'impianto attuale</li>
+            <li>Riscrittura dei testi</li>
+            <li>Sito reso utilizzabile dal telefono</li>
+          </ul>
         </div>
       </div>
     </div>
