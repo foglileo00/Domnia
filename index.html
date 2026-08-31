@@ -173,16 +173,6 @@
     max-height:calc(100vh - 60px); overflow-y:auto;
   }
   @media (max-width:560px){ .modal-inner{ padding:28px 22px; } }
-  .modal-close{
-    position:absolute; top:16px; right:16px; width:34px; height:34px;
-    display:flex; align-items:center; justify-content:center;
-    border:1px solid var(--line); border-radius:3px; background:var(--bg);
-    color:var(--ink-soft); font-size:17px; line-height:1; cursor:pointer;
-    transition:background .15s,color .15s,border-color .15s;
-  }
-  .modal-close:hover{ background:var(--accent); color:#FBF8F1; border-color:var(--accent); }
-  .modal h3{ font-size:22px; margin-top:8px; padding-right:44px; }
-  .modal-lead{ color:var(--ink-soft); font-size:14.5px; margin:14px 0 0; }
   .option-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; }
   .option-grid.single{ grid-template-columns:1fr; }
   @media (max-width:560px){ .option-grid{ grid-template-columns:1fr; } }
@@ -633,12 +623,17 @@
   </div>
 </footer>
 
-<dialog class="modal" id="modal-immobiliare" aria-labelledby="title-immobiliare">
+<dialog class="modal modal-fullscreen" id="modal-immobiliare" aria-labelledby="title-immobiliare">
   <div class="modal-inner">
-    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
-    <span class="eyebrow">Gestione Immobiliare</span>
-    <h3 id="title-immobiliare">Due formule di gestione</h3>
-    <p class="modal-lead">Scegliamo insieme la formula più adatta all'immobile e a quanto vuoi essere coinvolto.</p>
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Gestione Immobiliare</span>
+        <h3 id="title-immobiliare">Due formule di gestione</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+    <p class="fs-lead">Scegliamo insieme la formula più adatta all'immobile e a quanto vuoi essere coinvolto.</p>
     <div class="option-grid">
       <div class="option-card">
         <h4>Affitti Brevi</h4>
@@ -670,6 +665,7 @@
         <div class="step"><span class="step-num">06</span><p><strong>Crescita</strong> — seguiamo i risultati nel tempo.</p></div>
       </div>
     </details>
+    </div>
   </div>
 </dialog>
 
@@ -808,31 +804,43 @@
   </div>
 </dialog>
 
-<dialog class="modal" id="modal-attivita" aria-labelledby="title-attivita">
+<dialog class="modal modal-fullscreen" id="modal-attivita" aria-labelledby="title-attivita">
   <div class="modal-inner">
-    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
-    <span class="eyebrow">Attività Locali</span>
-    <h3 id="title-attivita">Farsi trovare nel proprio territorio</h3>
-    <p class="modal-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno.</p>
-    <div class="option-grid single">
-      <div class="option-card">
-        <h4>Cosa facciamo</h4>
-        <p>Sito vetrina, profilo Google Business ottimizzato e contenuti curati, per farti trovare da chi ti cerca in zona.</p>
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Attività Locali</span>
+        <h3 id="title-attivita">Farsi trovare nel proprio territorio</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+      <p class="fs-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno.</p>
+      <div class="option-grid single">
+        <div class="option-card">
+          <h4>Cosa facciamo</h4>
+          <p>Sito vetrina, profilo Google Business ottimizzato e contenuti curati, per farti trovare da chi ti cerca in zona.</p>
+        </div>
       </div>
     </div>
   </div>
 </dialog>
 
-<dialog class="modal" id="modal-professionisti" aria-labelledby="title-professionisti">
+<dialog class="modal modal-fullscreen" id="modal-professionisti" aria-labelledby="title-professionisti">
   <div class="modal-inner">
-    <button type="button" class="modal-close" data-modal-close aria-label="Chiudi">&times;</button>
-    <span class="eyebrow">Professionisti</span>
-    <h3 id="title-professionisti">Una presenza chiara e credibile</h3>
-    <p class="modal-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti.</p>
-    <div class="option-grid single">
-      <div class="option-card">
-        <h4>Cosa facciamo</h4>
-        <p>Sito professionale, presentazione dei servizi e canali di contatto diretti, senza template riconoscibili.</p>
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Professionisti</span>
+        <h3 id="title-professionisti">Una presenza chiara e credibile</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+      <p class="fs-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti.</p>
+      <div class="option-grid single">
+        <div class="option-card">
+          <h4>Cosa facciamo</h4>
+          <p>Sito professionale, presentazione dei servizi e canali di contatto diretti, senza template riconoscibili.</p>
+        </div>
       </div>
     </div>
   </div>
