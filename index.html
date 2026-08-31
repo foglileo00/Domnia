@@ -327,12 +327,16 @@
     font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
+  /* L'anteprima mostra solo il marchio del cliente, nessun testo sovrapposto. */
   .case-shot{
-    height:200px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    background-size:contain; background-position:center; background-repeat:no-repeat;
-    text-align:center; padding:22px;
+    height:260px;
+    background-position:center; background-repeat:no-repeat;
+    background-size:cover;
   }
-  .case-shot.fill-bg{ background-size:cover; }
+  @media (max-width:640px){ .case-shot{ height:220px; } }
+  /* Marchio quadrato su fondo pieno: lo teniamo intero e coloriamo il riquadro
+     con lo stesso crema del logo, cosi' le bande laterali non si vedono. */
+  .case-shot.logo-contain{ background-size:contain; }
   .case-shot-kind, .case-shot-name{ display:none; }
   @media (max-width:640px){ .case-shot{ height:170px; } }
   .case-shot-name{ font-family:'Fraunces',serif; font-size:23px; font-weight:600; color:var(--accent-deep); margin:0; }
@@ -771,7 +775,7 @@
               <span class="case-dot"></span><span class="case-dot"></span><span class="case-dot"></span>
               <span class="case-url">ilpiccolonido-versilia.com</span>
             </div>
-            <div class="case-shot fill-bg" style="background-image:url('images/piccolo-nido-logo.png');"></div>
+            <div class="case-shot logo-contain" style="background-image:url('images/piccolo-nido-logo.jpg'); background-color:#F8F1EB;"></div>
           </div>
           <div class="fs-case-body">
             <p class="case-sub">Appartamento turistico in Versilia</p>
