@@ -113,7 +113,7 @@
 
   /* ---------- HERO ---------- */
   .hero{ background:linear-gradient(180deg,var(--bg-hero-1) 0%, var(--bg-hero-2) 100%); padding:88px 0 72px; }
-  .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+  .hero-grid{ display:grid; grid-template-columns:1fr 1.08fr; gap:48px; align-items:center; }
   @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
   .hero h1{ font-size:clamp(36px,5vw,54px); line-height:1.08; margin-top:16px; }
   .hero-intro{ font-size:16px; line-height:1.75; color:var(--ink-soft); margin-top:22px; max-width:52ch; }
@@ -125,7 +125,10 @@
   .hero-tags span{ font-size:13px; color:var(--ink-soft); }
   .hero-tags .dot{ width:3px; height:3px; border-radius:50%; background:var(--ink-faint); }
   .hero-visual{ border-radius:26px; overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(42,36,32,0.06); }
-  .hero-visual img{ width:100%; height:auto; display:block; }
+  /* Altezza imposta con ritaglio centrato: la foto guadagna presenza in
+     verticale senza rubare larghezza al titolo, che altrimenti andrebbe
+     a capo una riga in piu'. */
+  .hero-visual img{ width:100%; height:clamp(340px,46vh,480px); object-fit:cover; display:block; }
 
   /* ---------- CHI SIAMO ---------- */
   .team-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -513,7 +516,7 @@
       <li><a href="#servizi">Servizi</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
-    <a class="btn btn-primary btn-sm" href="https://wa.me/390000000000" target="_blank" rel="noopener">
+    <a class="btn btn-primary btn-sm" href="https://wa.me/393200521933" target="_blank" rel="noopener">
       <svg class="wa-icon" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 0 0-5.6 9.8L1.5 14.5l3.3-.9A6.5 6.5 0 1 0 8 1.5Z" stroke="currentColor" stroke-width="1.2"/><path d="M5.6 5.4c.2-.4.4-.4.6-.4h.4c.2 0 .3 0 .4.3l.5 1.2c0 .2 0 .3-.1.4l-.4.5c-.1.1-.1.2 0 .4.3.6 1 1.3 1.6 1.6.2.1.3.1.4 0l.5-.4c.1-.1.2-.1.4-.1l1.2.5c.2.1.3.2.3.4v.4c0 .2 0 .4-.4.6-.4.3-1 .4-1.6.2-1.4-.4-2.9-1.9-3.3-3.3-.2-.6-.1-1.2.2-1.6Z" fill="currentColor"/></svg>
       WhatsApp
     </a>
@@ -594,7 +597,7 @@
       <div class="wrap">
         <h2 class="fade-up">Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
         <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
-        <a class="btn btn-primary" href="https://wa.me/390000000000?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
+        <a class="btn btn-primary" href="https://wa.me/393200521933?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -611,10 +614,10 @@
           <span class="contact-role">Sviluppo web &amp; soluzioni digitali</span>
           <p>Diplomato in Elettronica e Robotica, con esperienza nello sviluppo di siti web e soluzioni digitali per attività locali. Specializzato in strumenti che aumentano le prenotazioni e vendite dirette, riducendo la dipendenza dagli intermediari.</p>
           <ul class="contact-list">
-            <li><a href="mailto:joel@domnia.it"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>joel@domnia.it</a></li>
-            <li><a href="tel:+390000000001"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 000 000 0001</a></li>
+            <li><a href="mailto:jl.studio.management@gmail.com"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>jl.studio.management@gmail.com</a></li>
+            <li><a href="tel:+393347686288"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 334 768 6288</a></li>
             <li><a href="https://instagram.com/domnia.studio" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/></svg>@domnia.studio</a></li>
-            <li><a href="https://wa.me/390000000001" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>WhatsApp diretto</a></li>
+            <li><a href="https://wa.me/393347686288" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>WhatsApp diretto</a></li>
           </ul>
         </div>
         <div class="team-card">
@@ -622,10 +625,10 @@
           <span class="contact-role">Property management &amp; hospitality</span>
           <p>Esperienza diretta nella gestione di immobili per affitti brevi e nel settore dell'ospitalità in Toscana. Specializzato nella relazione con proprietari e ospiti, gestione prenotazioni, ottimizzazione degli annunci e sviluppo di canali di prenotazione diretta.</p>
           <ul class="contact-list">
-            <li><a href="mailto:leonardo@domnia.it"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>leonardo@domnia.it</a></li>
-            <li><a href="tel:+390000000002"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 000 000 0002</a></li>
+            <li><a href="mailto:jl.studio.management@gmail.com"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v8H2z" stroke="currentColor" stroke-width="1.4"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.4"/></svg>jl.studio.management@gmail.com</a></li>
+            <li><a href="tel:+393200521933"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M3 2c1 3 2 5 3 6s3 2 6 3l1-2 3 1v3c0 1-1 2-2 2C7 15 1 9 1 2c0-1 1-2 2-2z" stroke="currentColor" stroke-width="1.2"/></svg>+39 320 052 1933</a></li>
             <li><a href="https://instagram.com/domnia.studio" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="1.5" width="13" height="13" rx="3.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/></svg>@domnia.studio</a></li>
-            <li><a href="https://wa.me/390000000002" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>WhatsApp diretto</a></li>
+            <li><a href="https://wa.me/393200521933" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.3"/></svg>WhatsApp diretto</a></li>
           </ul>
         </div>
       </div>
