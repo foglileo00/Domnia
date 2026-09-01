@@ -15,8 +15,10 @@
     --bg-alt:     #F2E1C6;
     --surface:    #FFFEFA;
     --ink:        #2A241F;
-    --ink-soft:   #6E6355;
-    --ink-faint:  #9C9179;
+    /* Scuriti quel tanto che basta a compensare la fotografia di sfondo:
+       senza, il testo secondario scendeva sotto la soglia di leggibilita'. */
+    --ink-soft:   #655B4E;
+    --ink-faint:  #857B67;
     --accent:     #3B5741;
     --accent-deep:#2C4432;
     --accent-tint:#E4EADC;
@@ -49,12 +51,15 @@
      Fissa: resta ferma mentre si scorre, come una texture. */
   body::before{
     content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background:url('images/sfondo-vicolo.jpg') center center / cover no-repeat;
-    opacity:0.09;
+    background:url('images/sfondo-tramonto.jpg') center center / cover no-repeat;
+    /* 0.12 e' il limite oltre il quale il testo secondario scende sotto la
+       soglia di contrasto leggibile, misurato sul punto piu' scuro della
+       fotografia. Alzandola vanno riscuriti anche i colori del testo. */
+    opacity:0.12;
   }
   /* Su schermi stretti l'immagine si vedrebbe troppo ingrandita e
      disturberebbe la lettura: la attenuiamo ancora. */
-  @media (max-width:720px){ body::before{ opacity:0.06; } }
+  @media (max-width:720px){ body::before{ opacity:0.08; } }
 
   img,svg{ max-width:100%; display:block; }
   a{ color:inherit; text-decoration:none; }
@@ -136,7 +141,9 @@
   .hero-intro{ font-size:16px; line-height:1.75; color:var(--ink-soft); margin-top:22px; max-width:52ch; }
   .hero-intro strong{ color:var(--ink); font-weight:600; }
   .hero-intro em{ font-style:italic; color:var(--coral); }
-  .hero-sub{ font-size:15px; color:var(--ink-faint); margin-top:16px; max-width:46ch; }
+  /* Distinto dal paragrafo principale per corpo, non per colore: con
+     --ink-faint questo testo scendeva sotto la soglia di contrasto. */
+  .hero-sub{ font-size:15px; color:var(--ink-soft); margin-top:16px; max-width:46ch; }
   .hero-actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
   .hero-tags{ display:flex; gap:10px; margin-top:34px; flex-wrap:wrap; align-items:center; }
   .hero-tags span{ font-size:13px; color:var(--ink-soft); }
