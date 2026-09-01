@@ -173,15 +173,6 @@
     max-height:calc(100vh - 60px); overflow-y:auto;
   }
   @media (max-width:560px){ .modal-inner{ padding:28px 22px; } }
-  .option-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:26px; }
-  .option-grid.single{ grid-template-columns:1fr; }
-  @media (max-width:560px){ .option-grid{ grid-template-columns:1fr; } }
-  .option-card{ background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:20px; }
-  .option-card h4{ font-family:'Fraunces',serif; font-size:16.5px; font-weight:600; margin:0; }
-  .option-card p{ margin:10px 0 0; font-size:13.5px; color:var(--ink-soft); }
-  .option-card ul{ list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:7px; }
-  .option-card li{ font-size:13px; color:var(--ink-soft); padding-left:15px; position:relative; }
-  .option-card li::before{ content:"—"; position:absolute; left:0; color:var(--accent); }
   .modal-steps{ margin-top:22px; border-top:1px solid var(--line); padding-top:18px; }
   .modal-steps summary{
     display:flex; align-items:center; justify-content:space-between;
@@ -250,7 +241,7 @@
   .fs-close:hover{ background:var(--ink); color:#FBF8F1; border-color:var(--ink); }
   .fs-body{ flex:1; padding:36px 32px; max-width:900px; width:100%; margin:0 auto; }
   @media (max-width:640px){ .fs-body{ padding:24px 20px; } }
-  .fs-lead{ font-size:15px; color:var(--ink-soft); max-width:60ch; margin:0 0 32px; line-height:1.7; }
+  .fs-lead{ font-size:17px; color:var(--ink-soft); max-width:58ch; margin:0 0 10px; line-height:1.75; }
   .fs-lead strong{ color:var(--accent); }
   .fs-prop-list{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
   @media (max-width:720px){ .fs-prop-list{ grid-template-columns:1fr; } }
@@ -361,11 +352,41 @@
   @media (max-width:720px){ .servizi-scorciatoie{ grid-template-columns:1fr; } }
   .servizi-scorciatoie .btn-strutture{ margin-top:0; }
 
-  /* Divide il corpo di un modale in blocchi tematici. */
+  /* Divide il corpo di un modale in blocchi tematici. Nessun bordo: la
+     separazione la danno le righe sottili dei blocchi sottostanti. */
   .fs-sub{
     font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500;
-    text-transform:uppercase; letter-spacing:0.09em; color:var(--accent);
-    margin:40px 0 0; padding-top:28px; border-top:1px solid var(--line);
+    text-transform:uppercase; letter-spacing:0.09em; color:var(--ink-faint);
+    margin:52px 0 0;
+  }
+
+  /* Blocchi editoriali dentro i modali: al posto delle schede riquadrate,
+     gerarchia tipografica e filetti sottili. */
+  .fs-blocks{ display:grid; grid-template-columns:1fr 1fr; gap:0 58px; margin-top:18px; }
+  @media (max-width:760px){ .fs-blocks{ grid-template-columns:1fr; gap:0; } }
+  .fs-block{ padding:30px 0 34px; border-top:1px solid var(--line); }
+  .fs-block-num{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.14em; color:var(--coral); margin-bottom:13px;
+  }
+  .fs-block h4{
+    font-family:'Fraunces',serif; font-size:21px; font-weight:600;
+    line-height:1.25; margin:0; color:var(--ink);
+  }
+  .fs-block > p{
+    font-size:14.5px; line-height:1.75; color:var(--ink-soft);
+    margin:12px 0 0; max-width:44ch;
+  }
+  .fs-points{ list-style:none; margin:22px 0 0; padding:0; }
+  .fs-points li{
+    position:relative; padding-left:22px; margin-top:13px;
+    font-size:13.5px; line-height:1.6; color:var(--ink-soft);
+  }
+  .fs-points li:first-child{ margin-top:0; }
+  /* Trattino allineato alla prima riga, qualunque sia la lunghezza del testo. */
+  .fs-points li::before{
+    content:''; position:absolute; left:0; top:0.6em;
+    width:9px; height:1px; background:var(--accent);
   }
 
   /* ---------- SERVICES pillars ---------- */
@@ -624,48 +645,52 @@
     </div>
     <div class="fs-body">
     <p class="fs-lead">Ci occupiamo dell'immobile dall'inizio alla fine: annuncio, calendari, ospiti e presenza online. Tu scegli la formula più adatta alla casa e a quanto vuoi essere coinvolto, al resto pensiamo noi.</p>
-    <div class="option-grid">
-      <div class="option-card">
+    <div class="fs-blocks">
+      <article class="fs-block">
+        <span class="fs-block-num">Formula 01</span>
         <h4>Affitti Brevi</h4>
         <p>Case vacanza, appartamenti turistici e B&amp;B: soggiorni di pochi giorni, seguiti dall'annuncio al check-out.</p>
-        <ul>
+        <ul class="fs-points">
           <li>Calendari e annunci sincronizzati su più piattaforme</li>
           <li>Risposte agli ospiti tempestive e curate</li>
           <li>Canale di prenotazione diretta, per ridurre la dipendenza da Airbnb e Booking</li>
         </ul>
-      </div>
-      <div class="option-card">
+      </article>
+      <article class="fs-block">
+        <span class="fs-block-num">Formula 02</span>
         <h4>Affitti Transitori</h4>
         <p>Contratti a medio termine per studenti, lavoratori fuori sede e trasferte: meno turnover, entrate più stabili.</p>
-        <ul>
+        <ul class="fs-points">
           <li>Selezione e verifica degli inquilini</li>
           <li>Contratti e adempimenti seguiti da noi</li>
           <li>Gestione ordinaria e rapporto diretto con il proprietario</li>
         </ul>
-      </div>
+      </article>
     </div>
     <h4 class="fs-sub">Cosa comprende la gestione</h4>
-    <div class="option-grid">
-      <div class="option-card">
+    <div class="fs-blocks">
+      <article class="fs-block">
+        <span class="fs-block-num">01</span>
         <h4>Operatività quotidiana</h4>
         <p>La parte che porta via tempo e che non vorresti fare: la togliamo dal tuo tavolo e la seguiamo ogni giorno.</p>
-        <ul>
+        <ul class="fs-points">
           <li>Gestione degli annunci su Airbnb e Booking</li>
           <li>Sincronizzazione dei calendari, per non rischiare doppie prenotazioni</li>
           <li>Assistenza agli ospiti prima, durante e dopo il soggiorno</li>
           <li>Setup e ottimizzazione continua degli annunci</li>
         </ul>
-      </div>
-      <div class="option-card">
+      </article>
+      <article class="fs-block">
+        <span class="fs-block-num">02</span>
         <h4>Presenza digitale della casa</h4>
         <p>Un immobile che vive solo sulle piattaforme paga commissioni su ogni notte. Gli costruiamo un canale suo.</p>
-        <ul>
+        <ul class="fs-points">
           <li>Sito dedicato alla casa vacanza, veloce e pensato per il telefono</li>
           <li>Richiesta di prenotazione diretta, senza intermediari</li>
           <li>Descrizioni e foto curate, coerenti su tutti i canali</li>
           <li>Posizionamento sulle ricerche di zona</li>
         </ul>
-      </div>
+      </article>
     </div>
 
     <details class="modal-steps">
@@ -829,45 +854,49 @@
     </div>
     <div class="fs-body">
       <p class="fs-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno. Chi ti cerca dal telefono, a pochi passi da te, deve trovarti: nome, orari, indirizzo e un'immagine che ti somigli.</p>
-      <div class="option-grid">
-        <div class="option-card">
+      <div class="fs-blocks">
+        <article class="fs-block">
+          <span class="fs-block-num">01</span>
           <h4>Il sito della tua attività</h4>
           <p>Una vetrina essenziale che si apre in fretta anche sotto rete mobile, perché quasi tutti ti cercheranno dal telefono.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Sito per attività locali, pensato prima per lo schermo del telefono</li>
             <li>Prodotti o servizi presentati con chiarezza</li>
             <li>Orari, indirizzo e contatti sempre in vista</li>
             <li>QR code da esporre in negozio, per collegare il banco al sito</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">02</span>
           <h4>Farsi trovare in zona</h4>
           <p>Il grosso delle ricerche locali finisce su Google Maps, non su un motore di ricerca. È lì che bisogna esserci.</p>
-          <ul>
+          <ul class="fs-points">
             <li>SEO locale sulle ricerche del tuo territorio</li>
             <li>Profilo Google Business completo e aggiornato</li>
             <li>Foto, categorie e orari curati nel dettaglio</li>
             <li>Gestione delle recensioni e delle risposte</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">03</span>
           <h4>Contenuti e social</h4>
           <p>Un profilo abbandonato da mesi comunica più di quanto pensi. Meglio pochi contenuti, ma costanti.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Social management con un ritmo di pubblicazione sostenibile</li>
             <li>Strategia dei contenuti costruita sulla tua stagionalità</li>
             <li>Foto e testi coerenti con l'insegna</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">04</span>
           <h4>Rimettere in sesto quello che c'è</h4>
           <p>Se un sito esiste già, spesso non serve rifarlo da capo: va reso leggibile, veloce e aggiornabile.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Restyling di siti esistenti</li>
             <li>Recupero della velocità di caricamento</li>
             <li>Riscrittura dei testi poco chiari</li>
           </ul>
-        </div>
+        </article>
       </div>
     </div>
   </div>
@@ -884,44 +913,48 @@
     </div>
     <div class="fs-body">
       <p class="fs-lead">Per studi, consulenti e liberi professionisti che hanno bisogno di presentarsi bene e raccogliere contatti. Chi valuta di affidarti un incarico ti cerca online prima di scriverti: quello che trova è la tua prima impressione.</p>
-      <div class="option-grid">
-        <div class="option-card">
+      <div class="fs-blocks">
+        <article class="fs-block">
+          <span class="fs-block-num">01</span>
           <h4>Il tuo sito professionale</h4>
           <p>Un'immagine curata, costruita su misura: niente modelli riconoscibili, già visti su decine di altri siti.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Presentazione chiara di chi sei e di cosa fai</li>
             <li>Servizi descritti senza gergo inutile</li>
             <li>Percorsi e competenze messi in evidenza</li>
             <li>Struttura leggibile anche dal telefono</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">02</span>
           <h4>Landing page</h4>
           <p>Una pagina sola, con un solo obiettivo: utile per un servizio specifico, un'iniziativa o una campagna.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Messaggio concentrato su una singola richiesta</li>
             <li>Modulo di contatto essenziale</li>
             <li>Pagina indipendente dal resto del sito</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">03</span>
           <h4>Farsi contattare</h4>
           <p>Un sito che non genera richieste è una brochure. I canali di contatto devono essere immediati.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Contatto diretto via email, telefono e WhatsApp</li>
             <li>Modulo per le richieste, con i campi ridotti al minimo</li>
             <li>Presenza sulle ricerche di zona</li>
           </ul>
-        </div>
-        <div class="option-card">
+        </article>
+        <article class="fs-block">
+          <span class="fs-block-num">04</span>
           <h4>Restyling di siti esistenti</h4>
           <p>Se hai già un sito ma non lo mostreresti a un cliente, di solito si recupera invece di ripartire da zero.</p>
-          <ul>
+          <ul class="fs-points">
             <li>Rinnovo grafico sull'impianto attuale</li>
             <li>Riscrittura dei testi</li>
             <li>Sito reso utilizzabile dal telefono</li>
           </ul>
-        </div>
+        </article>
       </div>
     </div>
   </div>
