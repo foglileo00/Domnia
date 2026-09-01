@@ -360,6 +360,16 @@
     margin:52px 0 0;
   }
 
+  /* Coppia di fotografie dentro un modale. Altezza fissa e object-fit:
+     le due immagini hanno proporzioni diverse e senza ritaglio
+     resterebbero disallineate. */
+  .fs-photo-pair{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:26px; }
+  @media (max-width:640px){ .fs-photo-pair{ grid-template-columns:1fr; } }
+  .fs-photo-pair img{
+    display:block; width:100%; height:clamp(170px,24vh,230px);
+    object-fit:cover; border-radius:4px;
+  }
+
   /* Fascia video decorativa dentro un modale. */
   .fs-video-band{
     position:relative; margin-top:26px; border-radius:4px; overflow:hidden;
@@ -872,6 +882,11 @@
     </div>
     <div class="fs-body">
       <p class="fs-lead">Per negozi, botteghe e realtà di quartiere che vogliono una presenza online all'altezza del lavoro che fanno ogni giorno. Chi ti cerca dal telefono, a pochi passi da te, deve trovarti: nome, orari, indirizzo e un'immagine che ti somigli.</p>
+
+      <div class="fs-photo-pair">
+        <img src="images/attivita-trattoria.jpg" alt="Trattoria storica affacciata su una via del centro, con tavoli apparecchiati all'esterno" loading="lazy" width="1200" height="800">
+        <img src="images/attivita-artigianato.jpg" alt="Banco di una bottega artigiana con oggetti in legno e bigiotteria esposti in strada" loading="lazy" width="1200" height="966">
+      </div>
       <div class="fs-blocks">
         <article class="fs-block">
           <span class="fs-block-num">01</span>
