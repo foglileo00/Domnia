@@ -397,6 +397,63 @@
     object-fit:cover; border-radius:4px;
   }
 
+  /* ---------- QUESTIONARIO ---------- */
+  .progetto-nota{ margin:26px 0 0; font-size:15.5px; line-height:1.7; color:var(--ink-soft); max-width:56ch; }
+  .btn-progetto{ margin-top:20px; max-width:440px; }
+
+  /* La spaziatura sta sul contenitore, non sul titolo: dentro un fieldset i
+     margini di legend non si comportano come quelli di un titolo normale. */
+  .q-blocco{ border:none; margin:46px 0 0; padding:0; }
+  .q-blocco:first-of-type{ margin-top:34px; }
+  .q-blocco .fs-sub{ margin:0; padding:0; }
+  .q-aiuto{ font-size:13px; color:var(--ink-soft); margin:10px 0 0; max-width:56ch; }
+  .q-griglia{ display:grid; grid-template-columns:1fr 1fr; gap:18px 24px; margin-top:18px; }
+  @media (max-width:640px){ .q-griglia{ grid-template-columns:1fr; } }
+  .q-campo{ display:flex; flex-direction:column; gap:7px; margin-top:18px; }
+  .q-griglia .q-campo{ margin-top:0; }
+  .q-campo > span{ font-size:13.5px; color:var(--ink); font-weight:500; }
+  .q-campo b{ color:var(--coral); font-weight:500; }
+  .q-campo input, .q-campo textarea{
+    font-family:inherit; font-size:14.5px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:11px 13px; width:100%; resize:vertical;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .q-campo input::placeholder, .q-campo textarea::placeholder{ color:var(--ink-faint); }
+  .q-campo input:focus, .q-campo textarea:focus{
+    outline:none; border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(59,87,65,0.12);
+  }
+  /* Segnala i campi obbligatori solo dopo un tentativo di invio, non mentre
+     si sta ancora scrivendo. */
+  .q-inviato .q-campo input:invalid{ border-color:var(--coral); }
+
+  .q-scelte{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+  @media (max-width:640px){ .q-scelte{ grid-template-columns:1fr; } }
+  .q-sino{ display:flex; gap:10px; }
+  .q-sino .q-scelta{ flex:1; }
+  .q-scelta{
+    display:flex; align-items:center; gap:10px; cursor:pointer;
+    background:var(--surface); border:1px solid var(--line); border-radius:3px;
+    padding:12px 14px; font-size:14px; color:var(--ink);
+    transition:border-color .15s, background .15s;
+  }
+  .q-scelta:hover{ border-color:var(--accent); }
+  .q-scelta input{ accent-color:var(--accent); width:16px; height:16px; flex:none; margin:0; cursor:pointer; }
+  .q-scelta:has(input:checked){ border-color:var(--accent); background:var(--accent-tint); }
+  .q-altro{ max-width:520px; }
+
+  .q-invio{ margin-top:44px; padding-top:28px; border-top:1px solid var(--line); }
+  .q-invio .btn-primary{ border:none; }
+  .q-link{
+    background:none; border:none; padding:0; cursor:pointer;
+    font:inherit; font-size:13px; color:var(--accent);
+    text-decoration:underline; text-underline-offset:2px;
+  }
+  .q-link:hover{ color:var(--accent-deep); }
+  #q-esito:empty{ display:none; }
+  #q-esito{ color:var(--coral-deep); font-weight:500; }
+
   /* Fascia video decorativa dentro un modale. */
   .fs-video-band{
     position:relative; margin-top:26px; border-radius:4px; overflow:hidden;
@@ -623,6 +680,20 @@
         <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
         <a class="btn btn-primary" href="https://wa.me/393200521933?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
       </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="progetto">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow fade-up">Iniziamo</span>
+        <h2 class="fade-up" data-delay="1">Hai già un'idea per il tuo progetto?</h2>
+      </div>
+      <p class="progetto-nota fade-up" data-delay="2">Raccontacela in pochi minuti: qualche domanda per capire cosa ti serve, così arriviamo alla prima chiacchierata già preparati.</p>
+      <button type="button" class="btn-strutture btn-progetto" data-modal-open="modal-questionario">
+        <span>Compila la bozza del progetto</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </section>
 
@@ -894,6 +965,135 @@
   </div>
 </dialog>
 
+<dialog class="modal modal-fullscreen" id="modal-questionario" aria-labelledby="title-questionario">
+  <div class="modal-inner">
+    <div class="fs-header">
+      <div class="fs-title">
+        <span class="eyebrow">Iniziamo</span>
+        <h3 id="title-questionario">La bozza del tuo progetto</h3>
+      </div>
+      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="fs-body">
+      <p class="fs-lead">Nessuna risposta è definitiva: serve a capire da dove partiamo. Se un campo non sai come riempirlo, lascialo pure vuoto.</p>
+
+      <form id="form-questionario" novalidate>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Come ti chiami</legend>
+          <div class="q-griglia">
+            <label class="q-campo">
+              <span>Nome <b aria-hidden="true">*</b></span>
+              <input type="text" name="nome" autocomplete="given-name" required>
+            </label>
+            <label class="q-campo">
+              <span>Cognome <b aria-hidden="true">*</b></span>
+              <input type="text" name="cognome" autocomplete="family-name" required>
+            </label>
+            <label class="q-campo">
+              <span>Telefono</span>
+              <input type="tel" name="telefono" autocomplete="tel" inputmode="tel">
+            </label>
+            <label class="q-campo">
+              <span>Email <b aria-hidden="true">*</b></span>
+              <input type="email" name="email" autocomplete="email" inputmode="email" required>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Tipo di progetto</legend>
+          <p class="q-aiuto">Puoi sceglierne più di uno.</p>
+          <div class="q-scelte">
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Gestione immobiliare"><span>Gestione immobiliare</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Sito per casa vacanze"><span>Sito per casa vacanze</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Sito per attività locale"><span>Sito per attività locale</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Landing page"><span>Landing page</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Restyling sito esistente"><span>Restyling sito esistente</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Non lo so ancora"><span>Non lo so ancora</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Cosa hai già</legend>
+          <div class="q-griglia">
+            <div class="q-campo">
+              <span id="lab-logo">Hai già un logo?</span>
+              <div class="q-sino" role="radiogroup" aria-labelledby="lab-logo">
+                <label class="q-scelta"><input type="radio" name="logo" value="Sì"><span>Sì</span></label>
+                <label class="q-scelta"><input type="radio" name="logo" value="No"><span>No</span></label>
+              </div>
+            </div>
+            <div class="q-campo">
+              <span id="lab-materiale">Hai già foto e materiale?</span>
+              <div class="q-sino" role="radiogroup" aria-labelledby="lab-materiale">
+                <label class="q-scelta"><input type="radio" name="materiale" value="Sì"><span>Sì</span></label>
+                <label class="q-scelta"><input type="radio" name="materiale" value="No"><span>No</span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Obiettivo principale</legend>
+          <div class="q-scelte">
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Ricevere più prenotazioni"><span>Ricevere più prenotazioni</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Presentare meglio l'attività"><span>Presentare meglio l'attività</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Vendere un servizio o un prodotto"><span>Vendere un servizio o un prodotto</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Altro" id="obiettivo-altro"><span>Altro</span></label>
+          </div>
+          <label class="q-campo q-altro">
+            <span>Se altro, raccontacelo</span>
+            <input type="text" name="obiettivo_altro" placeholder="Scrivi qui il tuo obiettivo">
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">La tua attività</legend>
+          <label class="q-campo">
+            <span>Descrivi brevemente la tua attività o struttura</span>
+            <textarea name="attivita" rows="4" placeholder="Che cosa fai, da quanto, dove ti trovi, chi sono i tuoi clienti"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Come vorresti il sito</legend>
+          <div class="q-griglia">
+            <label class="q-campo">
+              <span>Stile</span>
+              <input type="text" name="stile" placeholder="Essenziale, elegante, caldo, moderno…">
+            </label>
+            <label class="q-campo">
+              <span>Colori</span>
+              <input type="text" name="colori" placeholder="Tonalità che ti piacciono o che eviteresti">
+            </label>
+          </div>
+          <label class="q-campo">
+            <span>Sezioni</span>
+            <textarea name="sezioni" rows="3" placeholder="Quali pagine o parti immagini: chi siamo, servizi, camere, contatti…"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Hai dei riferimenti?</legend>
+          <label class="q-campo">
+            <span>Siti che ti piacciono, o come li immagini</span>
+            <textarea name="riferimenti" rows="3" placeholder="Incolla i link, oppure descrivi a parole quello che hai in mente"></textarea>
+          </label>
+          <p class="q-aiuto">Le immagini non si possono allegare da questo modulo: mandacele pure nella stessa conversazione, subito dopo l'invio.</p>
+        </fieldset>
+
+        <div class="q-invio">
+          <button type="submit" class="btn btn-primary">Invia bozza <span class="btn-arrow">→</span></button>
+          <p class="q-aiuto" id="q-esito" role="status"></p>
+          <p class="q-aiuto">Si aprirà WhatsApp con la bozza già scritta: puoi rileggerla e modificarla prima di inviarla. <button type="button" class="q-link" id="q-email">Preferisci l'email?</button></p>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</dialog>
+
 <dialog class="modal modal-fullscreen" id="modal-attivita" aria-labelledby="title-attivita">
   <div class="modal-inner">
     <div class="fs-header">
@@ -1113,6 +1313,96 @@
       });
     }, { threshold: 0.12 });
     els.forEach(function(e){ io.observe(e); });
+  })();
+
+  (function(){
+    var form = document.getElementById('form-questionario');
+    if(!form) return;
+    var esito = document.getElementById('q-esito');
+    var NUMERO = '393200521933';
+    var EMAIL  = 'jl.studio.management@gmail.com';
+
+    function val(nome){
+      var e = form.elements[nome];
+      return e && e.value ? e.value.trim() : '';
+    }
+    function selezionati(nome){
+      return Array.prototype.slice.call(form.querySelectorAll('[name="'+nome+'"]:checked'))
+        .map(function(e){ return e.value; });
+    }
+    function riga(etichetta, valore){
+      return valore ? etichetta + ': ' + valore + '\n' : '';
+    }
+
+    function componiBozza(){
+      var obiettivo = selezionati('obiettivo')[0] || '';
+      if(obiettivo === 'Altro'){
+        var altro = val('obiettivo_altro');
+        obiettivo = altro ? 'Altro — ' + altro : 'Altro';
+      }
+      var t = 'BOZZA PROGETTO — DOMNIA\n\n';
+      t += riga('Nome', val('nome') + ' ' + val('cognome'));
+      t += riga('Telefono', val('telefono'));
+      t += riga('Email', val('email'));
+      t += riga('Tipo di progetto', selezionati('tipo').join(', '));
+      t += riga('Ha già un logo', selezionati('logo')[0] || '');
+      t += riga('Ha già foto e materiale', selezionati('materiale')[0] || '');
+      t += riga('Obiettivo principale', obiettivo);
+      t += riga('Attività', val('attivita'));
+      t += riga('Stile', val('stile'));
+      t += riga('Colori', val('colori'));
+      t += riga('Sezioni', val('sezioni'));
+      t += riga('Riferimenti', val('riferimenti'));
+      return t.trim();
+    }
+
+    // Gli indirizzi molto lunghi vengono troncati da alcuni browser: meglio
+    // avvisare che far partire un messaggio tagliato a meta'.
+    function controllaLunghezza(url){
+      if(url.length > 7000){
+        esito.textContent = 'La bozza è molto lunga e rischia di arrivare incompleta. Accorcia le descrizioni, oppure scrivici direttamente: la leggiamo comunque.';
+        return false;
+      }
+      return true;
+    }
+
+    function validoOppureSegnala(){
+      form.classList.add('q-inviato');
+      if(form.checkValidity()) { esito.textContent = ''; return true; }
+      esito.textContent = 'Controlla nome, cognome e email: servono per poterti rispondere.';
+      var primo = form.querySelector(':invalid');
+      if(primo){ primo.focus(); }
+      return false;
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!validoOppureSegnala()) return;
+      var url = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(componiBozza());
+      if(!controllaLunghezza(url)) return;
+      window.open(url, '_blank', 'noopener');
+    });
+
+    document.getElementById('q-email').addEventListener('click', function(){
+      if(!validoOppureSegnala()) return;
+      var url = 'mailto:' + EMAIL
+        + '?subject=' + encodeURIComponent('Bozza progetto — ' + (val('nome') || 'nuovo contatto'))
+        + '&body=' + encodeURIComponent(componiBozza());
+      if(!controllaLunghezza(url)) return;
+      window.location.href = url;
+    });
+
+    // Spuntando "Altro" il cursore va dritto nel campo libero.
+    var altroRadio = document.getElementById('obiettivo-altro');
+    if(altroRadio){
+      altroRadio.addEventListener('change', function(){
+        if(altroRadio.checked){ form.elements['obiettivo_altro'].focus(); }
+      });
+    }
+    // Scrivendo nel campo libero si seleziona "Altro" da solo.
+    form.elements['obiettivo_altro'].addEventListener('input', function(){
+      if(this.value.trim() && altroRadio){ altroRadio.checked = true; }
+    });
   })();
 
   (function(){
