@@ -400,6 +400,20 @@
   .q-scelta:has(input:checked){ border-color:var(--accent); background:var(--accent-tint); }
   .q-altro{ max-width:520px; }
 
+  /* Trappola anti-robot: fuori dallo schermo, non nascosta con display:none,
+     perche' i robot ignorano i campi dichiaratamente invisibili. */
+  .q-trappola{ position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+  .q-campo input[type="file"]{
+    padding:10px 13px; font-size:13.5px; cursor:pointer;
+  }
+  .q-campo input[type="file"]::file-selector-button{
+    font:inherit; font-size:13px; margin-right:12px; cursor:pointer;
+    background:var(--accent-tint); color:var(--accent-deep);
+    border:1px solid var(--line); border-radius:3px; padding:7px 13px;
+  }
+  .q-campo input[type="file"]:disabled{ opacity:.5; cursor:not-allowed; }
+
   .q-invio{ margin-top:44px; padding-top:28px; border-top:1px solid var(--line); }
   .q-invio .btn-primary{ border:none; }
   .q-link{

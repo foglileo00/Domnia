@@ -151,13 +151,56 @@
       return false;
     }
 
+    // Il modulo viene ricevuto solo dove il sito e' pubblicato su Netlify.
+    // In locale e su GitHub Pages non c'e' nessuno ad ascoltare: li'
+    // ripieghiamo su WhatsApp, cosi' la pagina non e' mai un vicolo cieco.
+    function inviaDavvero(){
+      var h = location.hostname;
+      return !(h === 'localhost' || h === '127.0.0.1' || h === '' || /\.github\.io$/.test(h));
+    }
+
+    var MAX_FILE = 8, MAX_MB = 8;
+    function allegatiAccettabili(){
+      var campo = form.elements['allegati'];
+      if(!campo || !campo.files || !campo.files.length) return true;
+      if(campo.files.length > MAX_FILE){
+        esito.textContent = 'Puoi allegare al massimo ' + MAX_FILE + ' file: ne hai scelti ' + campo.files.length + '.';
+        return false;
+      }
+      var tot = 0;
+      for(var i = 0; i < campo.files.length; i++){ tot += campo.files[i].size; }
+      if(tot > MAX_MB * 1024 * 1024){
+        esito.textContent = 'Gli allegati pesano ' + (tot / 1024 / 1024).toFixed(1) + ' MB, oltre il limite di ' + MAX_MB + ' MB. Togline qualcuno o mandaceli a parte.';
+        return false;
+      }
+      return true;
+    }
+
     form.addEventListener('submit', function(e){
+      if(!validoOppureSegnala() || !allegatiAccettabili()){ e.preventDefault(); return; }
+      if(inviaDavvero()){ return; }   // invio vero: lasciamo fare al browser
       e.preventDefault();
-      if(!validoOppureSegnala()) return;
       var url = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(componiBozza());
       if(!controllaLunghezza(url)) return;
       window.open(url, '_blank', 'noopener');
     });
+
+    // Finche' il sito non e' pubblicato, diciamolo invece di promettere
+    // un invio che non avverrebbe.
+    if(!inviaDavvero()){
+      var nota = document.getElementById('q-nota-invio');
+      var campoFile = form.elements['allegati'];
+      if(nota){
+        nota.firstChild.textContent = 'Si aprirà WhatsApp con la bozza già scritta: puoi rileggerla prima di inviarla. ';
+      }
+      if(campoFile){
+        campoFile.disabled = true;
+        var avviso = document.createElement('p');
+        avviso.className = 'q-aiuto';
+        avviso.textContent = 'Gli allegati funzioneranno una volta pubblicato il sito.';
+        campoFile.closest('.q-campo').insertAdjacentElement('afterend', avviso);
+      }
+    }
 
     document.getElementById('q-email').addEventListener('click', function(){
       if(!validoOppureSegnala()) return;

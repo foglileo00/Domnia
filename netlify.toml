@@ -1,0 +1,49 @@
+# Il sito e' fatto di file gia' pronti: nessuna compilazione da eseguire.
+# La cartella da pubblicare e' quella del progetto.
+[build]
+  publish = "."
+  command = ""
+
+# Indirizzi piu' puliti: /casi-studio invece di /casi-studio.html.
+# I vecchi indirizzi con .html continuano comunque a funzionare.
+[[redirects]]
+  from = "/casi-studio"
+  to = "/casi-studio.html"
+  status = 200
+
+[[redirects]]
+  from = "/gestione-immobiliare"
+  to = "/gestione-immobiliare.html"
+  status = 200
+
+[[redirects]]
+  from = "/attivita-locali"
+  to = "/attivita-locali.html"
+  status = 200
+
+[[redirects]]
+  from = "/professionisti"
+  to = "/professionisti.html"
+  status = 200
+
+[[redirects]]
+  from = "/strutture-in-gestione"
+  to = "/strutture-in-gestione.html"
+  status = 200
+
+[[redirects]]
+  from = "/questionario"
+  to = "/questionario.html"
+  status = 200
+
+# Le immagini e i video non cambiano quasi mai: chi torna sul sito
+# non deve riscaricarli ogni volta.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
