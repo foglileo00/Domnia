@@ -109,9 +109,6 @@
   @media (max-width:640px){ section{ padding:64px 0; } }
   .section-head{ max-width:640px; margin-bottom:52px; }
   .section-head h2{ font-size:clamp(28px,3.6vw,38px); margin-top:10px; }
-  .intro-text{ max-width:640px; font-size:15px; line-height:1.7; color:var(--ink-soft); margin-bottom:40px; }
-  .intro-text strong{ color:var(--ink); font-weight:600; }
-  .intro-text em{ font-style:italic; color:var(--coral); }
   .band-alt{ background:var(--bg-alt); }
 
   /* ---------- HERO ---------- */
@@ -119,7 +116,10 @@
   .hero-grid{ display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
   @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; gap:40px; } }
   .hero h1{ font-size:clamp(36px,5vw,54px); line-height:1.08; margin-top:16px; }
-  .hero-sub{ font-size:17px; color:var(--ink-soft); margin-top:20px; max-width:46ch; }
+  .hero-intro{ font-size:16px; line-height:1.75; color:var(--ink-soft); margin-top:22px; max-width:52ch; }
+  .hero-intro strong{ color:var(--ink); font-weight:600; }
+  .hero-intro em{ font-style:italic; color:var(--coral); }
+  .hero-sub{ font-size:15px; color:var(--ink-faint); margin-top:16px; max-width:46ch; }
   .hero-actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
   .hero-tags{ display:flex; gap:10px; margin-top:34px; flex-wrap:wrap; align-items:center; }
   .hero-tags span{ font-size:13px; color:var(--ink-soft); }
@@ -527,8 +527,9 @@
       <div>
         <span class="eyebrow fade-up">Fai crescere il tuo progetto</span>
         <h1 class="fade-up" data-delay="1">Gestione Immobiliare e digitale in Toscana.</h1>
-        <p class="hero-sub fade-up" data-delay="2">Domnia gestisce affitti brevi, case vacanza e strutture ricettive in Toscana, con siti web, annunci e supporto operativo per più prenotazioni dirette.</p>
-        <div class="hero-actions fade-up" data-delay="3">
+        <p class="hero-intro fade-up" data-delay="2"><strong>Domnia</strong> nasce dall'incrocio tra <em>domus</em> (casa) e <em>omnia</em> (tutto): vogliamo essere il riferimento unico per chi ha una proprietà immobiliare e vuole gestirla in maniera moderna, trasparente e profittevole. Non facciamo promesse, facciamo crescere il tuo patrimonio e la tua attività con soluzioni concrete e risultati misurabili.</p>
+        <p class="hero-sub fade-up" data-delay="3">Domnia gestisce affitti brevi, case vacanza e strutture ricettive in Toscana, con siti web, annunci e supporto operativo per più prenotazioni dirette.</p>
+        <div class="hero-actions fade-up" data-delay="4">
           <a class="btn btn-primary" href="#servizi">Scopri i servizi</a>
           <a class="btn btn-ghost" href="#contatti">Contattaci</a>
         </div>
@@ -608,7 +609,6 @@
         <span class="eyebrow fade-up">Chi siamo</span>
         <h2 class="fade-up" data-delay="1">Due percorsi, un metodo condiviso</h2>
       </div>
-      <p class="intro-text fade-up" data-delay="2"><strong>Domnia</strong> nasce dall'incrocio tra <em>domus</em> (casa) e <em>omnia</em> (tutto): vogliamo essere il riferimento unico per chi ha una proprietà immobiliare e vuole gestirla in maniera moderna, trasparente e profittevole. Non facciamo promesse, facciamo crescere il tuo patrimonio e la tua attività con soluzioni concrete e risultati misurabili.</p>
       <div class="team-grid">
         <div class="team-card">
           <h3>Joel Novo Navarrete</h3>
