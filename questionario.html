@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La bozza del tuo progetto — Domnia</title>
+<meta name="description" content="Raccontaci il tuo progetto in pochi minuti: qualche domanda per capire cosa ti serve e arrivare preparati alla prima consulenza.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-row">
+    <a class="logo" href="index.html">Domnia</a>
+    <ul class="nav-links">
+      <li><a href="index.html#chi-siamo">Chi siamo</a></li>
+      <li><a href="index.html#servizi">Servizi</a></li>
+      <li><a href="index.html#progetto">Progetto</a></li>
+      <li><a href="index.html#contatti">Contatti</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" href="https://wa.me/393200521933" target="_blank" rel="noopener">
+      <svg class="wa-icon" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 0 0-5.6 9.8L1.5 14.5l3.3-.9A6.5 6.5 0 1 0 8 1.5Z" stroke="currentColor" stroke-width="1.2"/><path d="M5.6 5.4c.2-.4.4-.4.6-.4h.4c.2 0 .3 0 .4.3l.5 1.2c0 .2 0 .3-.1.4l-.4.5c-.1.1-.1.2 0 .4.3.6 1 1.3 1.6 1.6.2.1.3.1.4 0l.5-.4c.1-.1.2-.1.4-.1l1.2.5c.2.1.3.2.3.4v.4c0 .2 0 .4-.4.6-.4.3-1 .4-1.6.2-1.4-.4-2.9-1.9-3.3-3.3-.2-.6-.1-1.2.2-1.6Z" fill="currentColor"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="fs-body pagina">
+    <a class="torna" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Torna alla home
+    </a>
+    <span class="eyebrow">Iniziamo</span>
+    <h1 class="pagina-titolo">La bozza del tuo progetto</h1>
+
+      <p class="fs-lead">Nessuna risposta è definitiva: serve a capire da dove partiamo. Se un campo non sai come riempirlo, lascialo pure vuoto.</p>
+
+      <form id="form-questionario" novalidate>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Come ti chiami</legend>
+          <div class="q-griglia">
+            <label class="q-campo">
+              <span>Nome <b aria-hidden="true">*</b></span>
+              <input type="text" name="nome" autocomplete="given-name" required>
+            </label>
+            <label class="q-campo">
+              <span>Cognome <b aria-hidden="true">*</b></span>
+              <input type="text" name="cognome" autocomplete="family-name" required>
+            </label>
+            <label class="q-campo">
+              <span>Telefono</span>
+              <input type="tel" name="telefono" autocomplete="tel" inputmode="tel">
+            </label>
+            <label class="q-campo">
+              <span>Email <b aria-hidden="true">*</b></span>
+              <input type="email" name="email" autocomplete="email" inputmode="email" required>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Tipo di progetto</legend>
+          <p class="q-aiuto">Puoi sceglierne più di uno.</p>
+          <div class="q-scelte">
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Gestione immobiliare"><span>Gestione immobiliare</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Sito per casa vacanze"><span>Sito per casa vacanze</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Sito per attività locale"><span>Sito per attività locale</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Landing page"><span>Landing page</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Restyling sito esistente"><span>Restyling sito esistente</span></label>
+            <label class="q-scelta"><input type="checkbox" name="tipo" value="Non lo so ancora"><span>Non lo so ancora</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Cosa hai già</legend>
+          <div class="q-griglia">
+            <div class="q-campo">
+              <span id="lab-logo">Hai già un logo?</span>
+              <div class="q-sino" role="radiogroup" aria-labelledby="lab-logo">
+                <label class="q-scelta"><input type="radio" name="logo" value="Sì"><span>Sì</span></label>
+                <label class="q-scelta"><input type="radio" name="logo" value="No"><span>No</span></label>
+              </div>
+            </div>
+            <div class="q-campo">
+              <span id="lab-materiale">Hai già foto e materiale?</span>
+              <div class="q-sino" role="radiogroup" aria-labelledby="lab-materiale">
+                <label class="q-scelta"><input type="radio" name="materiale" value="Sì"><span>Sì</span></label>
+                <label class="q-scelta"><input type="radio" name="materiale" value="No"><span>No</span></label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Obiettivo principale</legend>
+          <div class="q-scelte">
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Ricevere più prenotazioni"><span>Ricevere più prenotazioni</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Presentare meglio l'attività"><span>Presentare meglio l'attività</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Vendere un servizio o un prodotto"><span>Vendere un servizio o un prodotto</span></label>
+            <label class="q-scelta"><input type="radio" name="obiettivo" value="Altro" id="obiettivo-altro"><span>Altro</span></label>
+          </div>
+          <label class="q-campo q-altro">
+            <span>Se altro, raccontacelo</span>
+            <input type="text" name="obiettivo_altro" placeholder="Scrivi qui il tuo obiettivo">
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">La tua attività</legend>
+          <label class="q-campo">
+            <span>Descrivi brevemente la tua attività o struttura</span>
+            <textarea name="attivita" rows="4" placeholder="Che cosa fai, da quanto, dove ti trovi, chi sono i tuoi clienti"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Come vorresti il sito</legend>
+          <div class="q-griglia">
+            <label class="q-campo">
+              <span>Stile</span>
+              <input type="text" name="stile" placeholder="Essenziale, elegante, caldo, moderno…">
+            </label>
+            <label class="q-campo">
+              <span>Colori</span>
+              <input type="text" name="colori" placeholder="Tonalità che ti piacciono o che eviteresti">
+            </label>
+          </div>
+          <label class="q-campo">
+            <span>Sezioni</span>
+            <textarea name="sezioni" rows="3" placeholder="Quali pagine o parti immagini: chi siamo, servizi, camere, contatti…"></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="q-blocco">
+          <legend class="fs-sub">Hai dei riferimenti?</legend>
+          <label class="q-campo">
+            <span>Siti che ti piacciono, o come li immagini</span>
+            <textarea name="riferimenti" rows="3" placeholder="Incolla i link, oppure descrivi a parole quello che hai in mente"></textarea>
+          </label>
+          <p class="q-aiuto">Le immagini non si possono allegare da questo modulo: mandacele pure nella stessa conversazione, subito dopo l'invio.</p>
+        </fieldset>
+
+        <div class="q-invio">
+          <button type="submit" class="btn btn-primary">Invia bozza <span class="btn-arrow">→</span></button>
+          <p class="q-aiuto" id="q-esito" role="status"></p>
+          <p class="q-aiuto">Si aprirà WhatsApp con la bozza già scritta: puoi rileggerla e modificarla prima di inviarla. <button type="button" class="q-link" id="q-email">Preferisci l'email?</button></p>
+        </div>
+
+      </form>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <hr class="hairline" style="margin-bottom:32px">
+    <div class="footer-row">
+      <div>
+        <a class="logo" href="index.html">Domnia</a>
+        <p class="footer-copy">© 2026 Domnia — Property &amp; Digital Business Management. Tutti i diritti riservati.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="index.html#chi-siamo">Chi siamo</a></li>
+        <li><a href="index.html#servizi">Servizi</a></li>
+        <li><a href="index.html#progetto">Progetto</a></li>
+        <li><a href="index.html#contatti">Contatti</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
