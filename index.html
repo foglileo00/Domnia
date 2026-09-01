@@ -398,8 +398,6 @@
   }
 
   /* ---------- QUESTIONARIO ---------- */
-  .progetto-nota{ margin:26px 0 0; font-size:15.5px; line-height:1.7; color:var(--ink-soft); max-width:56ch; }
-  .btn-progetto{ margin-top:20px; max-width:440px; }
 
   /* La spaziatura sta sul contenitore, non sul titolo: dentro un fieldset i
      margini di legend non si comportano come quelli di un titolo normale. */
@@ -546,8 +544,15 @@
     color:#E4EDE0; max-width:52ch; margin:18px auto 0; font-size:15.5px;
     text-shadow:0 1px 10px rgba(0,0,0,0.45);
   }
-  .video-cta .btn-primary{ background:#FBF8F1; color:var(--accent-deep); margin-top:28px; }
-  .video-cta .btn-primary:hover{ background:#fff; }
+  .video-azioni{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
+  .video-cta .btn-primary{ background:#FBF8F1; color:var(--accent-deep); border:1px solid #FBF8F1; }
+  .video-cta .btn-primary:hover{ background:#fff; border-color:#fff; }
+  /* Secondaria sul video: contorno chiaro, cosi' resta leggibile sopra la
+     ripresa senza competere con il pulsante principale. */
+  .btn-chiaro{
+    background:transparent; color:#FBF8F1; border:1px solid rgba(251,248,241,0.55);
+  }
+  .btn-chiaro:hover{ background:rgba(251,248,241,0.14); border-color:#FBF8F1; }
 
   /* ---------- CONTACT ---------- */
   .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
@@ -595,6 +600,7 @@
     <ul class="nav-links">
       <li><a href="#chi-siamo">Chi siamo</a></li>
       <li><a href="#servizi">Servizi</a></li>
+      <li><a href="#progetto">Progetto</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
     <a class="btn btn-primary btn-sm" href="https://wa.me/393200521933" target="_blank" rel="noopener">
@@ -667,7 +673,7 @@
     </div>
   </section>
 
-  <section class="video-band reveal">
+  <section class="video-band reveal" id="progetto">
     <video
       class="band-video"
       src="video/domnia-presentazione.mp4"
@@ -676,24 +682,13 @@
     ></video>
     <div class="video-cta">
       <div class="wrap">
-        <h2 class="fade-up">Possiamo aiutarti a costruire una presenza digitale più chiara, professionale e utile</h2>
-        <p class="fade-up" data-delay="1">Prenota la prima consulenza conoscitiva</p>
-        <a class="btn btn-primary" href="https://wa.me/393200521933?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota su WhatsApp <span class="btn-arrow">→</span></a>
+        <h2 class="fade-up">Hai già un'idea per il progetto?</h2>
+        <p class="fade-up" data-delay="1">Raccontacela in pochi minuti: qualche domanda per capire cosa ti serve, così arriviamo alla prima chiacchierata già preparati.</p>
+        <div class="video-azioni">
+          <button type="button" class="btn btn-primary" data-modal-open="modal-questionario">Compila la bozza <span class="btn-arrow">→</span></button>
+          <a class="btn btn-chiaro" href="https://wa.me/393200521933?text=Ciao%20Domnia%2C%20vorrei%20prenotare%20una%20prima%20consulenza%20gratuita." target="_blank" rel="noopener">Prenota una consulenza</a>
+        </div>
       </div>
-    </div>
-  </section>
-
-  <section class="reveal" id="progetto">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow fade-up">Iniziamo</span>
-        <h2 class="fade-up" data-delay="1">Hai già un'idea per il tuo progetto?</h2>
-      </div>
-      <p class="progetto-nota fade-up" data-delay="2">Raccontacela in pochi minuti: qualche domanda per capire cosa ti serve, così arriviamo alla prima chiacchierata già preparati.</p>
-      <button type="button" class="btn-strutture btn-progetto" data-modal-open="modal-questionario">
-        <span>Compila la bozza del progetto</span>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
   </section>
 
@@ -744,6 +739,7 @@
       <ul class="footer-links">
         <li><a href="#chi-siamo">Chi siamo</a></li>
         <li><a href="#servizi">Servizi</a></li>
+        <li><a href="#progetto">Progetto</a></li>
         <li><a href="#contatti">Contatti</a></li>
       </ul>
     </div>
