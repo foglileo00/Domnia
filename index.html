@@ -360,6 +360,18 @@
     margin:52px 0 0;
   }
 
+  /* Fascia video decorativa dentro un modale. */
+  .fs-video-band{
+    position:relative; margin-top:26px; border-radius:4px; overflow:hidden;
+    height:clamp(170px,26vh,250px); background:var(--ink);
+  }
+  .fs-video-band video{ display:block; width:100%; height:100%; object-fit:cover; }
+  /* Velatura: smorza la ripresa e la fa leggere come sfondo, non come player. */
+  .fs-video-band::after{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(20,26,18,0.30), rgba(20,26,18,0.55));
+  }
+
   /* Blocchi editoriali dentro i modali: al posto delle schede riquadrate,
      gerarchia tipografica e filetti sottili. */
   .fs-blocks{ display:grid; grid-template-columns:1fr 1fr; gap:0 58px; margin-top:18px; }
@@ -645,6 +657,12 @@
     </div>
     <div class="fs-body">
     <p class="fs-lead">Ci occupiamo dell'immobile dall'inizio alla fine: annuncio, calendari, ospiti e presenza online. Tu scegli la formula più adatta alla casa e a quanto vuoi essere coinvolto, al resto pensiamo noi.</p>
+
+    <!-- preload="none": il video parte solo quando il modale viene aperto,
+         cosi' non pesa sul caricamento di chi non lo apre mai. -->
+    <div class="fs-video-band">
+      <video src="video/gestione-immobiliare-bg.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    </div>
     <div class="fs-blocks">
       <article class="fs-block">
         <span class="fs-block-num">Formula 01</span>
@@ -1014,6 +1032,25 @@
       var qualcunoAperto = false;
       fsModals.forEach(function(m){ if(m.open){ qualcunoAperto = true; } });
       document.body.style.overflow = qualcunoAperto ? 'hidden' : '';
+      // I video dentro i modali partono solo a schermata aperta: hanno
+      // preload="none", quindi finche' nessuno apre non vengono scaricati.
+      fsModals.forEach(function(m){
+        m.querySelectorAll('.fs-video-band video').forEach(function(v){
+          if(v.dataset.fermo){ return; }   // animazioni ridotte: resta fermo
+          if(!m.open){ v.pause(); return; }
+          // Con preload="none" al momento dell'apertura il video non e'
+          // ancora caricato e play() verrebbe rifiutato: aspettiamo che
+          // sia pronto. Il controllo su m.open evita che parta se nel
+          // frattempo la schermata e' gia' stata richiusa.
+          var avvia = function(){
+            if(!m.open){ return; }
+            var p = v.play();
+            if(p && p.catch){ p.catch(function(){}); }
+          };
+          if(v.readyState >= 2){ avvia(); }
+          else { v.addEventListener('canplay', avvia, { once:true }); v.load(); }
+        });
+      });
     }
     if('MutationObserver' in window){
       fsModals.forEach(function(fsModal){
@@ -1045,10 +1082,14 @@
     // sul primo fotogramma, come fosse una fotografia. Niente comandi di
     // riproduzione: finirebbero sotto il testo sovrapposto e sarebbero inutili.
     if(!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
-    document.querySelectorAll('.band-video').forEach(function(v){
+    document.querySelectorAll('.band-video, .fs-video-band video').forEach(function(v){
       v.removeAttribute('autoplay');
       v.removeAttribute('loop');
+      v.dataset.fermo = '1';
       v.pause();
+      // Con preload="none" resterebbe un riquadro vuoto: carichiamo almeno
+      // il primo fotogramma, cosi' si vede un'immagine ferma.
+      if(v.preload === 'none'){ v.preload = 'metadata'; v.load(); }
     });
   })();
 </script>
