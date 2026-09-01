@@ -351,28 +351,6 @@
   .servizi-scorciatoie{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   @media (max-width:720px){ .servizi-scorciatoie{ grid-template-columns:1fr; } }
   .servizi-scorciatoie .btn-strutture{ margin-top:0; }
-  .servizi-nota{ margin:38px 0 0; font-size:15.5px; line-height:1.7; color:var(--ink-soft); max-width:54ch; }
-  /* margin-top:auto di .btn-strutture serve solo dentro una scheda flessibile:
-     qui il pulsante e' isolato, quindi gli diamo margine e larghezza propri. */
-  .btn-risultati{ margin-top:18px; max-width:420px; }
-
-  /* Griglia per i numeri dentro il modale dei risultati. */
-  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:0 48px; margin-top:22px; }
-  @media (max-width:760px){ .stat-grid{ grid-template-columns:1fr; gap:0; } }
-  .stat{ padding:28px 0 30px; border-top:1px solid var(--line); }
-  .stat-num{ font-family:'Fraunces',serif; font-size:40px; font-weight:600; line-height:1; color:var(--accent); }
-  .stat-label{ font-size:14px; color:var(--ink); margin:12px 0 0; }
-  .stat-note{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.09em;
-    text-transform:uppercase; color:var(--ink-faint); margin:8px 0 0;
-  }
-
-  /* Segnaposto: sezione ancora senza contenuti. */
-  .fs-vuoto{
-    margin-top:26px; padding:44px 28px; text-align:center;
-    border:1px dashed var(--line); border-radius:4px;
-  }
-  .fs-vuoto p{ font-size:14.5px; color:var(--ink-faint); margin:0; max-width:46ch; margin-inline:auto; }
 
   /* Divide il corpo di un modale in blocchi tematici. Nessun bordo: la
      separazione la danno le righe sottili dei blocchi sottostanti. */
@@ -602,12 +580,6 @@
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
       </div>
-
-      <p class="servizi-nota fade-up">Guarda i risultati concreti della nostra gestione, prima e dopo il nostro intervento.</p>
-      <button type="button" class="btn-strutture btn-risultati" data-modal-open="modal-risultati">
-        <span>Dati e statistiche</span>
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
   </section>
 
@@ -890,54 +862,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-</dialog>
-
-<dialog class="modal modal-fullscreen" id="modal-risultati" aria-labelledby="title-risultati">
-  <div class="modal-inner">
-    <div class="fs-header">
-      <div class="fs-title">
-        <span class="eyebrow">Il nostro lavoro</span>
-        <h3 id="title-risultati">Dati e statistiche</h3>
-      </div>
-      <button type="button" class="fs-close" data-modal-close aria-label="Chiudi">&times;</button>
-    </div>
-    <div class="fs-body">
-      <p class="fs-lead">I numeri delle strutture che gestiamo: occupazione, rendita e andamento delle prenotazioni, prima e dopo il nostro intervento.</p>
-
-      <!-- =====================================================================
-           SPAZIO PER I DATI REALI
-
-           Quando hai i numeri, cancella il blocco <div class="fs-vuoto">
-           qui sotto e togli i commenti dall'esempio che segue. Lo stile e'
-           gia' pronto: servono solo i valori.
-
-           <div class="stat-grid">
-             <div class="stat">
-               <div class="stat-num">+38%</div>
-               <p class="stat-label">Occupazione media annua</p>
-               <p class="stat-note">Torre del Lago · 2025 su 2024</p>
-             </div>
-             <div class="stat">
-               <div class="stat-num">92%</div>
-               <p class="stat-label">Notti occupate in alta stagione</p>
-               <p class="stat-note">Lido di Camaiore · estate 2025</p>
-             </div>
-             <div class="stat">
-               <div class="stat-num">4,9</div>
-               <p class="stat-label">Valutazione media degli ospiti</p>
-               <p class="stat-note">Airbnb e Booking · 2025</p>
-             </div>
-           </div>
-
-           I valori qui sopra sono solo un esempio di come si scrivono:
-           vanno sostituiti con i dati veri prima di pubblicare.
-           ===================================================================== -->
-
-      <div class="fs-vuoto">
-        <p>Stiamo raccogliendo i dati delle strutture in gestione. Questa sezione sarà pubblicata a breve.</p>
       </div>
     </div>
   </div>
