@@ -178,11 +178,11 @@
 
     form.addEventListener('submit', function(e){
       if(!validoOppureSegnala() || !allegatiAccettabili()){ e.preventDefault(); return; }
-      if(inviaDavvero()){ return; }   // invio vero: lasciamo fare al browser
-      e.preventDefault();
       var url = 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(componiBozza());
-      if(!controllaLunghezza(url)) return;
+      if(!controllaLunghezza(url)) { e.preventDefault(); return; }
       window.open(url, '_blank', 'noopener');
+      if(inviaDavvero()){ return; }
+      e.preventDefault();
     });
 
     // Finche' il sito non e' pubblicato, diciamolo invece di promettere
