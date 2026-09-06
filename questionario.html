@@ -35,21 +35,7 @@
       <form
         id="form-questionario"
         name="bozza-progetto"
-        method="POST"
-        action="/grazie.html"
-        enctype="multipart/form-data"
-        data-netlify="true"
-        netlify-honeypot="lascia-vuoto"
         novalidate>
-
-        <!-- Netlify riconosce il modulo dal nome; questo campo nascosto glielo
-             ripete al momento dell'invio ed e' obbligatorio. -->
-        <input type="hidden" name="form-name" value="bozza-progetto">
-        <!-- Trappola per i robot: una persona non lo vede e lo lascia vuoto.
-             Se arriva compilato, l'invio viene scartato in silenzio. -->
-        <p class="q-trappola" aria-hidden="true">
-          <label>Lascia vuoto questo campo <input name="lascia-vuoto" tabindex="-1" autocomplete="off"></label>
-        </p>
 
         <fieldset class="q-blocco">
           <legend class="fs-sub">Come ti chiami</legend>
@@ -152,17 +138,12 @@
             <span>Siti che ti piacciono, o come li immagini</span>
             <textarea name="riferimenti" rows="3" placeholder="Incolla i link, oppure descrivi a parole quello che hai in mente"></textarea>
           </label>
-          <label class="q-campo">
-            <span>Oppure allega delle immagini</span>
-            <input type="file" name="allegati" multiple accept="image/*,.pdf">
-          </label>
-          <p class="q-aiuto">Puoi allegare foto, schizzi o un PDF. Fino a 8 file, massimo 8 MB in tutto.</p>
         </fieldset>
 
         <div class="q-invio">
           <button type="submit" class="btn btn-primary">Invia bozza <span class="btn-arrow">→</span></button>
           <p class="q-aiuto" id="q-esito" role="status"></p>
-          <p class="q-aiuto" id="q-nota-invio">Si aprirà WhatsApp con la bozza già scritta, e una copia resta salvata da noi allegati compresi. <button type="button" class="q-link" id="q-email">Preferisci scrivere un'email?</button></p>
+          <p class="q-aiuto" id="q-nota-invio">Si aprirà WhatsApp con la bozza già scritta: puoi rileggerla prima di inviarla. <button type="button" class="q-link" id="q-email">Preferisci scrivere un'email?</button></p>
         </div>
 
       </form>
