@@ -1,0 +1,8 @@
+# Tutti i motori di ricerca possono leggere tutto il sito.
+User-agent: *
+Allow: /
+
+# La pagina di conferma dopo l'invio non ha senso nei risultati di ricerca.
+Disallow: /grazie.html
+
+Sitemap: https://domnia-gestioneimmobiliare.com/sitemap.xml

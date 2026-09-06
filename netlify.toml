@@ -4,6 +4,15 @@
   publish = "."
   command = ""
 
+# Il sito risponde anche su domnia.netlify.app: due indirizzi con lo stesso
+# contenuto dividono il valore agli occhi di Google. Mandiamo tutto sul
+# dominio vero, una volta sola.
+[[redirects]]
+  from = "https://domnia.netlify.app/*"
+  to = "https://domnia-gestioneimmobiliare.com/:splat"
+  status = 301
+  force = true
+
 # Indirizzi piu' puliti: /casi-studio invece di /casi-studio.html.
 # I vecchi indirizzi con .html continuano comunque a funzionare.
 [[redirects]]
